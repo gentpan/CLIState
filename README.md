@@ -12,9 +12,22 @@ CLIState 是一个原生 macOS 应用，用来理解和管理你的命令行开�
 
 ## 下载安装
 
+**Homebrew（推荐）**
+
+```bash
+brew tap gentpan/tap
+brew trust gentpan/tap
+brew install --cask clistate
+```
+
+Homebrew 6 需要先信任第三方 tap（`brew trust`）才能安装。
+
+**手动下载**
+
 1. 从 [Releases](https://github.com/gentpan/CLIState/releases/latest) 下载 `CLIState-<版本>.zip`（已签名并经 Apple 公证）。
 2. 解压后把 `CLIState.app` 拖进"应用程序"文件夹。
-3. 之后的版本会在 App 内自动提示更新，也可以在 设置 › 关于 里手动检查。
+
+之后的版本会在 App 内自动提示更新，也可以在 设置 › 关于 里手动检查。
 
 系统要求：macOS 15 或更高版本，支持 Apple Silicon 与 Intel。
 

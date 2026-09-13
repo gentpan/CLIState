@@ -12,9 +12,22 @@ It is not another Homebrew GUI: a Homebrew GUI shows what Homebrew has; CLIState
 
 ## Install
 
+**Homebrew (recommended)**
+
+```bash
+brew tap gentpan/tap
+brew trust gentpan/tap
+brew install --cask clistate
+```
+
+Homebrew 6 requires trusting a third-party tap (`brew trust`) before installing from it.
+
+**Manual download**
+
 1. Download `CLIState-<version>.zip` from [Releases](https://github.com/gentpan/CLIState/releases/latest) (signed and notarized by Apple).
 2. Unzip it and move `CLIState.app` to Applications.
-3. Later versions are offered inside the app; you can also check in Settings › About.
+
+Later versions are offered inside the app; you can also check in Settings › About.
 
 Requires macOS 15 or later, Apple Silicon or Intel.
 
