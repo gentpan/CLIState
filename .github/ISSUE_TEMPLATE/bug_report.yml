@@ -1,0 +1,57 @@
+name: Bug report / 问题反馈
+description: Something is wrong or a tool is detected incorrectly / 功能异常或识别不准确
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report! A diagnostics bundle (Settings › About › Export Diagnostics…) helps a lot. It is redacted, but please review it before attaching.
+        感谢反馈！附上诊断包（设置 › 关于 › 导出诊断包…）能大幅加快定位。诊断包已脱敏，上传前也请自行查看。
+  - type: input
+    id: version
+    attributes:
+      label: CLIState version / 版本
+      description: Settings › About
+      placeholder: 0.1.0 (1)
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and chip / macOS 版本与芯片
+      placeholder: macOS 15.5, Apple Silicon
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area / 相关功能
+      options:
+        - Detection or attribution / 识别或来源判断
+        - Versions or updates / 版本或更新
+        - Update, uninstall or services / 更新、卸载或服务
+        - Cleanup / 清理
+        - PATH or shell environment / PATH 或 Shell 环境
+        - UI or localization / 界面或翻译
+        - App update (Sparkle) / App 自身更新
+        - Other / 其他
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? / 发生了什么？
+      description: What did you expect, and what did CLIState show instead? / 你期望什么，CLIState 实际显示了什么？
+    validations:
+      required: true
+  - type: textarea
+    id: terminal
+    attributes:
+      label: Terminal output (optional) / 终端输出（可选）
+      description: e.g. `which -a <command>`, `brew info <formula>`. Remove anything private. / 例如 `which -a <命令>`。请先删掉隐私信息。
+      render: shell
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics bundle (optional) / 诊断包（可选）
+      description: Drag clistate-diagnostics.zip here. / 把 clistate-diagnostics.zip 拖到这里。

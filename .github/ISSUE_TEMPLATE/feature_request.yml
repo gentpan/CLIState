@@ -1,0 +1,21 @@
+name: Feature request / 功能建议
+description: Suggest an improvement or a package manager to support / 建议新功能或新的包管理器
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve? / 想解决什么问题？
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like CLIState to do? / 希望 CLIState 怎么做？
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: Package manager or tool involved (optional) / 涉及的包管理器或工具（可选）
+      placeholder: e.g. mise, asdf, Nix, MacPorts
