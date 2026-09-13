@@ -1,14 +1,14 @@
-# CLIState
+# CLI State
 
 **Know what's running in your terminal.**
 
 [简体中文](README.md) · [Download](https://github.com/gentpan/CLIState/releases/latest) · [Report an issue](https://github.com/gentpan/CLIState/issues/new/choose)
 
-![CLIState overview](docs/images/overview.png)
+![CLI State overview](docs/images/overview.png)
 
-CLIState is a native macOS app for understanding and managing your command-line development environment. It discovers tools and runtimes installed through Homebrew, npm, uv, pipx, pnpm, Cargo and official installers, resolves the binaries your terminal actually runs from your real PATH, detects duplicate and conflicting installations, and keeps track of available updates.
+CLI State is a native macOS app for understanding and managing your command-line development environment. It discovers tools and runtimes installed through Homebrew, npm, uv, pipx, pnpm, Cargo and official installers, resolves the binaries your terminal actually runs from your real PATH, detects duplicate and conflicting installations, and keeps track of available updates.
 
-It is not another Homebrew GUI: a Homebrew GUI shows what Homebrew has; CLIState shows what your terminal environment actually is.
+It is not another Homebrew GUI: a Homebrew GUI shows what Homebrew has; CLI State shows what your terminal environment actually is.
 
 ## Install
 
@@ -66,11 +66,11 @@ Requires macOS 15 or later, Apple Silicon or Intel.
 
 ## FAQ
 
-**Where do version numbers come from?** CLIState keeps no package database of its own. It asks each package manager's registry — Homebrew (formulae.brew.sh), npm (registry.npmjs.org), PyPI, crates.io — and respects mirrors you configured.
+**Where do version numbers come from?** CLI State keeps no package database of its own. It asks each package manager's registry — Homebrew (formulae.brew.sh), npm (registry.npmjs.org), PyPI, crates.io — and respects mirrors you configured.
 
-**Do I need to update every day?** No. CLIState checks once a day, read-only, and only notifies by default. Only tools you set to Automatic update in the background, and major versions are skipped by default.
+**Do I need to update every day?** No. While it runs, CLI State checks on a schedule (every 3 hours by default, refreshing Homebrew package info first) and only notifies by default. Only tools you set to Automatic are updated in the background, once a day after the time you choose, and major versions are skipped by default.
 
-**How does CLIState update itself?** Through Sparkle, from this repository's Releases, verifying signatures before installing.
+**How does CLI State update itself?** Through Sparkle, from this repository's Releases, verifying signatures before installing.
 
 ## Feedback
 

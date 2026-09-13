@@ -10,7 +10,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: CLIState version / 版本
+      label: CLI State version / 版本
       description: Settings › About
       placeholder: 0.1.0 (1)
     validations:
@@ -41,7 +41,7 @@ body:
     id: what
     attributes:
       label: What happened? / 发生了什么？
-      description: What did you expect, and what did CLIState show instead? / 你期望什么，CLIState 实际显示了什么？
+      description: What did you expect, and what did CLI State show instead? / 你期望什么，CLI State 实际显示了什么？
     validations:
       required: true
   - type: textarea

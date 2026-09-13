@@ -11,7 +11,7 @@ body:
   - type: textarea
     id: idea
     attributes:
-      label: What would you like CLIState to do? / 希望 CLIState 怎么做？
+      label: What would you like CLI State to do? / 希望 CLI State 怎么做？
     validations:
       required: true
   - type: input

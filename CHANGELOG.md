@@ -2,11 +2,15 @@
 
 ## 0.2.0
 
+**说明 / Notes**
+- 产品名称改为 CLI State（App 文件名、GitHub 仓库和 Homebrew 安装名 `clistate` 保持不变）。
+- The product is now called CLI State (the app file, GitHub repository and Homebrew token `clistate` stay the same).
+
 **新增 / Added**
 - 环境迁移：导出当前开发环境（配置文件或 Brewfile），在新 Mac 上导入对比后分步安装；内置 9 套模板，可让 AI 从内置工具清单中推荐。
 - Environment restore: export your setup (profile or Brewfile), compare and install it step by step on a new Mac; 9 templates, plus AI suggestions limited to known tools.
-- 变更时间线：记录每次扫描之间工具、版本、生效程序和 PATH 的变化，并区分由 CLIState 执行还是外部变更。
-- Change timeline: what changed between scans (tools, versions, active binaries, PATH), marked as done by CLIState or external.
+- 变更时间线：记录每次扫描之间工具、版本、生效程序和 PATH 的变化，并区分由 CLI State 执行还是外部变更。
+- Change timeline: what changed between scans (tools, versions, active binaries, PATH), marked as done by CLI State or external.
 - 运行时停止支持提醒：Node、Python、PHP、Go、Ruby、PostgreSQL 等版本已停止或即将停止官方支持时提醒。
 - End-of-life reminders for Node, Python, PHP, Go, Ruby, PostgreSQL and more.
 - AI 解释：用 Mac 本地的 Apple 模型，或 OpenAI、DeepSeek 等 API，解释某个工具是做什么的、要不要保留。
@@ -19,6 +23,12 @@
 - Settings: Light / Dark / System appearance and language choice.
 
 **改进 / Improved**
+- 全新概览页：已安装、可更新、问题和占用空间一目了然；列出占用空间最多的工具、最近使用的工具和 90 天以上没用过的工具，以及安装方式和分类分布。
+- New Overview dashboard: installed tools, updates, issues and disk space at a glance, with the largest tools, recently used tools, tools unused for 90 days, and breakdowns by installer and category.
+- 菜单栏面板重新设计，图标改为 App 标志样式；增加强制刷新。
+- Redesigned menu bar panel with an app-icon style menu bar icon and a force refresh button.
+- App 自身更新支持官方服务器与 GitHub 双线路，连不上时自动切换。
+- CLI State updates itself from an update server or GitHub, switching automatically when one can't be reached.
 - 工具页重新设计：分类标签和筛选菜单、单行表格、更简洁的详情面板；滚动条改为细的自动隐藏样式。
 - Redesigned Tools page: category chips and a filter menu, single-line rows, a cleaner inspector, thin overlay scroll bars.
 - 刚检查过更新时，启动不再重复联网，启动更快。

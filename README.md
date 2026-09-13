@@ -1,14 +1,14 @@
-# CLIState
+# CLI State
 
 **看清 Mac 上安装的 CLI、运行时和开发工具，并知道终端真正使用的是哪一个版本。**
 
 [English](README.en.md) · [下载](https://github.com/gentpan/CLIState/releases/latest) · [反馈问题](https://github.com/gentpan/CLIState/issues/new/choose)
 
-![CLIState 概览](docs/images/overview.png)
+![CLI State 概览](docs/images/overview.png)
 
-CLIState 是一个原生 macOS 应用，用来理解和管理你的命令行开发环境。它会自动发现通过 Homebrew、npm、uv、pipx、pnpm、Cargo 以及官方安装器装上的工具，按终端的真实 PATH 解析出实际生效的可执行文件，找出重复安装和冲突，并跟踪可用更新。
+CLI State 是一个原生 macOS 应用，用来理解和管理你的命令行开发环境。它会自动发现通过 Homebrew、npm、uv、pipx、pnpm、Cargo 以及官方安装器装上的工具，按终端的真实 PATH 解析出实际生效的可执行文件，找出重复安装和冲突，并跟踪可用更新。
 
-它不是另一个 Homebrew GUI：Homebrew 关心"Homebrew 里有什么"，CLIState 关心"终端实际是什么环境"。
+它不是另一个 Homebrew GUI：Homebrew 关心"Homebrew 里有什么"，CLI State 关心"终端实际是什么环境"。
 
 ## 下载安装
 
@@ -66,11 +66,11 @@ Homebrew 6 需要先信任第三方 tap（`brew trust`）才能安装。
 
 ## 常见问题
 
-**版本信息从哪里来？** CLIState 不维护自己的软件包数据库，而是询问各包管理器的官方源：Homebrew（formulae.brew.sh）、npm（registry.npmjs.org）、PyPI、crates.io 等。你为 npm、Homebrew、uv 配置的镜像同样生效。
+**版本信息从哪里来？** CLI State 不维护自己的软件包数据库，而是询问各包管理器的官方源：Homebrew（formulae.brew.sh）、npm（registry.npmjs.org）、PyPI、crates.io 等。你为 npm、Homebrew、uv 配置的镜像同样生效。
 
-**需要每天手动更新吗？** 不需要。CLIState 每天在设定时间只读地检查一次，默认只提醒；只有你设为"自动"的工具才会在后台更新，而且默认跳过大版本。
+**需要每天手动更新吗？** 不需要。CLI State 打开期间会定时检查（默认每 3 小时，检查前先刷新 Homebrew 软件包信息），默认只提醒；只有你设为"自动"的工具才会每天在设定时间后台更新一次，而且默认跳过大版本。
 
-**CLIState 自己怎么更新？** App 内置 Sparkle 更新机制，从本仓库的 Releases 获取新版本，并校验签名后才安装。
+**CLI State 自己怎么更新？** App 内置 Sparkle 更新机制，从本仓库的 Releases 获取新版本，并校验签名后才安装。
 
 ## 反馈问题
 
