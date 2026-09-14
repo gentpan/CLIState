@@ -33,6 +33,9 @@ Requires macOS 15 or later, Apple Silicon or Intel.
 
 ## Features
 
+- **Discover tools**: curated developer, PHP, Python and media tools, with existing-install detection and individual or batch installation previews.
+- **Visual overview**: installation-source charts, recorded version changes and environment checks with actionable maintenance.
+
 - **Environment discovery** — starts your login shell in a clean environment to read the same PATH a new Terminal window gets; flags missing, duplicate and privacy-protected entries.
 - **Resolution chains** — every PATH match for a command in order, which one is active, which are shadowed, and shell aliases/functions that run first.
 - **Attribution with evidence** — who installed each executable (Homebrew, npm, uv, pipx, pnpm, Cargo, nvm, rustup, official installers, macOS…), with evidence and confidence. Anything not confirmed stays read-only.

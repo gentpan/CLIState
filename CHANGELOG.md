@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.2.1
+
+**新增 / Added**
+- 新增“发现”页面：按开发入门、PHP、Python、影音处理分类展示 8 个精选工具，支持搜索、已安装识别和单个／批量安装预览。
+- Discover curated developer, PHP, Python and media tools, with search, installed detection and individual or batch installation previews.
+- 概览增加可视化环境检查、安装来源圆环图和可处理项入口；历史趋势按实际记录展示。
+- Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
+
+**改进与修复 / Improvements and fixes**
+- 统一页面标题、原生 Liquid Glass 按钮、表单、筛选与程序字体；优化列表和可关闭的详情面板。
+- Consistent page titles, native Liquid Glass controls on macOS 26+, typography, filters and dismissible inspectors.
+- 单个更新不再触发完整软件包信息刷新；批量更新先检查新数据，操作后重新扫描。
+- Individual updates reuse available package information; batch updates refresh first and operations rescan afterward.
+- 清理预览保留来源明确的建议项；无法直接处理的问题提供具体处理方式。
+- More reliable cleanup previews and concrete guidance for issues requiring manual attention.
+- 卸载结果明确区分被移除的安装来源与仍然存在的其他副本。
+- Uninstall results identify the removed provider and any remaining installations.
+- 官方更新服务器与 GitHub 备用线路，带签名校验的更新发布。
+- Signed update delivery through the official server and GitHub fallback.
+
 ## 0.2.0
 
 **说明 / Notes**
