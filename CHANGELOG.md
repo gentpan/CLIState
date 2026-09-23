@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 修复设置“关于”页的内容越界裁切；版本、联系链接、App 更新与诊断信息改为适配窗口宽度的分组布局。
+- Fixed clipped content in Settings › About, with window-width-aware groups for version, contact links, app updates and diagnostics.
 - 清理一项后自动重建预览，剩余项目无需手动刷新即可继续显示；清理页统计和筛选栏也改为紧凑布局。
 - Cleanup rebuilds its preview after each removal so remaining items stay visible without a manual refresh; counts and filters use a compact layout.
 - 概览的“我可以管理哪些工具？”改为紧凑的平面统计入口，点击后继续按对应条件筛选工具。

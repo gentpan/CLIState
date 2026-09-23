@@ -235,32 +235,8 @@ private struct AboutSettings: View {
     }
 
     var body: some View {
-        DSForm {
-            Section {
-                LabeledContent("Version") {
-                    Text(version).font(DS.Font.mono).textSelection(.enabled)
-                }
-                LabeledContent("Feedback") {
-                    Link(destination: URL(string: "mailto:feedback@clistate.com")!) {
-                        Text(verbatim: "feedback@clistate.com")
-                    }
-                }
-                LabeledContent("Contact & Partnerships") {
-                    Link(destination: URL(string: "mailto:hello@clistate.com")!) {
-                        Text(verbatim: "hello@clistate.com")
-                    }
-                }
-                LabeledContent("GitHub") {
-                    Link(destination: URL(string: "https://github.com/gentpan/CLIState/issues")!) {
-                        Text("Report an Issue")
-                    }
-                }
-                LabeledContent("Website") {
-                    Link(destination: URL(string: "https://clistate.com")!) {
-                        Text(verbatim: "clistate.com")
-                    }
-                }
-            } header: {
+        ScrollView {
+            VStack(alignment: .leading, spacing: DS.Space.s4) {
                 VStack(alignment: .leading, spacing: DS.Space.s1) {
                     Text(verbatim: "CLI State")
                         .font(DS.Font.title)
@@ -269,48 +245,105 @@ private struct AboutSettings: View {
                         .font(DS.Font.body)
                         .foregroundStyle(DS.Palette.textSecondary)
                 }
-                .padding(.bottom, DS.Space.s2)
-            }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-            Section {
-                Toggle("Automatically check for CLI State updates", isOn: Binding(
-                    get: { updater.automaticallyChecksForUpdates },
-                    set: { updater.automaticallyChecksForUpdates = $0 }
-                ))
-                .disabled(!updater.isConfigured)
-                if updater.hasUpdateServer {
-                    Picker(selection: Binding(get: { updater.source }, set: { updater.setSource($0) })) {
-                        ForEach(AppUpdateSource.allCases, id: \.self) { source in
-                            Text(source.title).tag(source)
+                VStack(alignment: .leading, spacing: DS.Space.s3) {
+                    infoRow("Version") {
+                        Text(version).font(DS.Font.mono).textSelection(.enabled)
+                    }
+                    infoRow("Feedback") {
+                        aboutLink("feedback@clistate.com", destination: "mailto:feedback@clistate.com")
+                    }
+                    infoRow("Contact & Partnerships") {
+                        aboutLink("hello@clistate.com", destination: "mailto:hello@clistate.com")
+                    }
+                    infoRow("GitHub") {
+                        Link(destination: URL(string: "https://github.com/gentpan/CLIState/issues")!) {
+                            Text("Report an Issue").foregroundStyle(DS.Palette.highlight)
                         }
-                    } label: {
-                        Text("Download from")
-                        Text("Automatic tries the update server first and uses GitHub when it can't be reached.")
+                        .buttonStyle(.plain)
+                    }
+                    infoRow("Website") {
+                        aboutLink("clistate.com", destination: "https://clistate.com")
                     }
                 }
-                Button("Check for CLI State Updates…") { updater.checkForUpdates() }
-                    .disabled(!updater.canCheckForUpdates)
-            } header: {
-                Text("App updates")
-            } footer: {
-                if !updater.isConfigured {
-                    Text("App updates turn on once the first public release is published.")
+                .dsCard()
+
+                VStack(alignment: .leading, spacing: DS.Space.s2) {
+                    Text("App updates").font(DS.Font.headline)
+                    VStack(alignment: .leading, spacing: DS.Space.s3) {
+                        Toggle("Automatically check for CLI State updates", isOn: Binding(
+                            get: { updater.automaticallyChecksForUpdates },
+                            set: { updater.automaticallyChecksForUpdates = $0 }
+                        ))
+                        .disabled(!updater.isConfigured)
+                        if updater.hasUpdateServer {
+                            VStack(alignment: .leading, spacing: DS.Space.s1) {
+                                HStack(spacing: DS.Space.s3) {
+                                    Text("Download from")
+                                        .font(DS.Font.body)
+                                    Spacer(minLength: DS.Space.s2)
+                                    Picker("Download from", selection: Binding(get: { updater.source }, set: { updater.setSource($0) })) {
+                                        ForEach(AppUpdateSource.allCases, id: \.self) { source in
+                                            Text(source.title).tag(source)
+                                        }
+                                    }
+                                    .labelsHidden()
+                                    .frame(width: DS.Layout.keyColumn + DS.Space.s12)
+                                }
+                                Text("Automatic tries the update server first and uses GitHub when it can't be reached.")
+                                    .font(DS.Font.caption)
+                                    .foregroundStyle(DS.Palette.textSecondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                        Button("Check for CLI State Updates…") { updater.checkForUpdates() }
+                            .disabled(!updater.canCheckForUpdates)
+                    }
+                    .dsCard()
+                    if !updater.isConfigured {
+                        Text("App updates turn on once the first public release is published.")
+                            .font(DS.Font.caption)
+                            .foregroundStyle(DS.Palette.textSecondary)
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: DS.Space.s2) {
+                    Text("Troubleshooting").font(DS.Font.headline)
+                    Button("Export Diagnostics…") { model.exportDiagnostics() }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .dsCard()
+                    Text("Creates a zip with versions, PATH, package managers, issues and recent operations. Your home folder and account name are replaced, and no environment variables or command output are included.")
                         .font(DS.Font.caption)
                         .foregroundStyle(DS.Palette.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
-
-            Section {
-                Button("Export Diagnostics…") { model.exportDiagnostics() }
-            } header: {
-                Text("Troubleshooting")
-            } footer: {
-                Text("Creates a zip with versions, PATH, package managers, issues and recent operations. Your home folder and account name are replaced, and no environment variables or command output are included.")
-                    .font(DS.Font.caption)
-                    .foregroundStyle(DS.Palette.textSecondary)
-            }
+            .padding(DS.Space.s4)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .dsScrollBackground()
+    }
+
+    private func infoRow<Content: View>(_ title: LocalizedStringKey, @ViewBuilder content: () -> Content) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: DS.Space.s3) {
+            Text(title)
+                .font(DS.Font.body)
+                .foregroundStyle(DS.Palette.textSecondary)
+                .frame(width: DS.Layout.keyColumn, alignment: .leading)
+            content()
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    private func aboutLink(_ title: String, destination: String) -> some View {
+        Link(destination: URL(string: destination)!) {
+            Text(verbatim: title)
+                .foregroundStyle(DS.Palette.highlight)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .buttonStyle(.plain)
     }
 }
 
