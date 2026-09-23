@@ -1,0 +1,25 @@
+[
+  {
+    "path": "/Users/tester/Library/pnpm/global/5",
+    "private": false,
+    "dependencies": {
+      "@anthropic-ai/claude-code": {
+        "from": "@anthropic-ai/claude-code",
+        "version": "2.1.236",
+        "resolved": "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-2.1.236.tgz",
+        "path": "/Users/tester/Library/pnpm/global/5/node_modules/.pnpm/@anthropic-ai+claude-code@2.1.236/node_modules/@anthropic-ai/claude-code"
+      },
+      "my-linked-cli": {
+        "from": "my-linked-cli",
+        "version": "link:../../../../src/my-linked-cli",
+        "path": "/Users/tester/src/my-linked-cli"
+      },
+      "typescript": {
+        "from": "typescript",
+        "version": "5.9.2",
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.9.2.tgz",
+        "path": "/Users/tester/Library/pnpm/global/5/node_modules/.pnpm/typescript@5.9.2/node_modules/typescript"
+      }
+    }
+  }
+]

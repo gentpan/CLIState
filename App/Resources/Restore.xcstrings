@@ -1,0 +1,1586 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ couldn't be installed because %@ returned an error. View the output for details." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ 安装失败：%2$@ 返回了错误。查看输出了解详情。"
+          }
+        }
+      }
+    },
+    "%@ isn't a CLI State environment profile." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 不是 CLI State 环境配置文件。"
+          }
+        }
+      }
+    },
+    "%@ isn't installed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未安装 %@"
+          }
+        }
+      }
+    },
+    "%@ via %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@（通过 %2$@）"
+          }
+        }
+      }
+    },
+    "%@ via %@, was %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@（通过 %2$@），原为 %3$@"
+          }
+        }
+      }
+    },
+    "%lld of %lld selected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已选 %1$lld / %2$lld 项"
+          }
+        }
+      }
+    },
+    "%lld packages" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 个软件包"
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld package"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld packages"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld selected to install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已选 %lld 项待安装"
+          }
+        }
+      }
+    },
+    "AI CLI Toolkit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI CLI 工具包"
+          }
+        }
+      }
+    },
+    "AI Suggestion" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI 建议"
+          }
+        }
+      }
+    },
+    "AI only picks from CLI State's list of known tools. It never writes commands, and nothing is installed until you review the checklist and confirm." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI 只会从 CLI State 已知的工具清单里挑选，不会编写任何命令；在你核对清单并确认之前，什么都不会安装。"
+          }
+        }
+      }
+    },
+    "Already installed (%lld)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已安装（%lld）"
+          }
+        }
+      }
+    },
+    "CLI State didn't find packages you installed yourself with a supported package manager." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有找到你通过受支持的包管理器主动安装的软件包。"
+          }
+        }
+      }
+    },
+    "CLI State runs the commands below, then rescans to confirm each package is installed. Packages that are already installed aren't upgraded." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLI State 会运行下面的命令，然后重新扫描，确认每个软件包都已装好。已经安装的软件包不会被升级。"
+          }
+        }
+      }
+    },
+    "Can't Install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法安装"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "Choose a .clistate-profile.json file saved on another Mac. CLI State compares it with this Mac before anything is installed." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择在另一台 Mac 上保存的 .clistate-profile.json 文件。安装任何东西之前，CLI State 会先把它和这台 Mac 做对比。"
+          }
+        }
+      }
+    },
+    "Claude Code, Codex, Gemini CLI, opencode and Aider, with Node.js and uv." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code、Codex、Gemini CLI、opencode 和 Aider，附带 Node.js 与 uv。"
+          }
+        }
+      }
+    },
+    "Command finished, but the rescan didn't find every package" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "命令已完成，但重新扫描没有找到全部软件包"
+          }
+        }
+      }
+    },
+    "Copied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已复制"
+          }
+        }
+      }
+    },
+    "Copy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制"
+          }
+        }
+      }
+    },
+    "Couldn't Open the Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法打开配置文件"
+          }
+        }
+      }
+    },
+    "Couldn't Prepare the Installation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法准备安装"
+          }
+        }
+      }
+    },
+    "Couldn't Save the Brewfile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法保存 Brewfile"
+          }
+        }
+      }
+    },
+    "Couldn't Save the Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法保存配置文件"
+          }
+        }
+      }
+    },
+    "Curated sets of well-known tools. Pick one, review the checklist, then install what's missing." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "精选的常用工具组合。选一个模板，核对清单，再安装缺少的部分。"
+          }
+        }
+      }
+    },
+    "Deselect All" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全不选"
+          }
+        }
+      }
+    },
+    "DevOps & Cloud" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "运维 / 云"
+          }
+        }
+      }
+    },
+    "Don't ask again for %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "对 %@ 不再询问"
+          }
+        }
+      }
+    },
+    "Environment Restore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "环境迁移"
+          }
+        }
+      }
+    },
+    "Export Brewfile…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出 Brewfile…"
+          }
+        }
+      }
+    },
+    "Export This Mac" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出当前环境"
+          }
+        }
+      }
+    },
+    "For example: a React front end and a Go API with PostgreSQL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例如：React 前端，加上用 PostgreSQL 的 Go API"
+          }
+        }
+      }
+    },
+    "For your information only. CLI State doesn't upgrade or downgrade these here." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅供参考。CLI State 不会在这里升级或降级它们。"
+          }
+        }
+      }
+    },
+    "Frontend Web" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前端 Web"
+          }
+        }
+      }
+    },
+    "Go Backend" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go 后端"
+          }
+        }
+      }
+    },
+    "Go with gopls and golangci-lint, PostgreSQL and Redis." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go 与 gopls、golangci-lint，外加 PostgreSQL 和 Redis。"
+          }
+        }
+      }
+    },
+    "Homebrew Cask" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Homebrew Cask"
+          }
+        }
+      }
+    },
+    "Homebrew runs first, so runtimes exist before npm, uv, pipx and Cargo need them. Nothing runs until you confirm." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先运行 Homebrew，让 npm、uv、pipx 和 Cargo 用到的运行时先装好。确认之前不会运行任何命令。"
+          }
+        }
+      }
+    },
+    "Import from File" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从文件导入"
+          }
+        }
+      }
+    },
+    "Install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装"
+          }
+        }
+      }
+    },
+    "Install %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装 %@"
+          }
+        }
+      }
+    },
+    "Install %@ first, then refresh." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先安装 %@，然后刷新。"
+          }
+        }
+      }
+    },
+    "Install %lld Tools" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装 %lld 个工具"
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Install %lld Tool"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Install %lld Tools"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Install %lld tools" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装 %lld 个工具"
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Install %lld tool"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Install %lld tools"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Install Homebrew yourself by running this command in Terminal, then refresh. CLI State never runs it for you." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请自己在“终端”里运行这条命令安装 Homebrew，然后刷新。CLI State 不会替你运行它。"
+          }
+        }
+      }
+    },
+    "Install Rust first (Homebrew's rust, or rustup followed by `rustup default stable`), then refresh." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先安装 Rust（Homebrew 的 rust，或 rustup 后再运行 `rustup default stable`），然后刷新。"
+          }
+        }
+      }
+    },
+    "Install Selected…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装所选…"
+          }
+        }
+      }
+    },
+    "Install pipx first (for example with Homebrew), then refresh." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先安装 pipx（例如用 Homebrew），然后刷新。"
+          }
+        }
+      }
+    },
+    "Install pnpm first, then run `pnpm setup` in Terminal and refresh." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先安装 pnpm，在“终端”里运行 `pnpm setup`，然后刷新。"
+          }
+        }
+      }
+    },
+    "Install uv first (for example with Homebrew), then refresh." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先安装 uv（例如用 Homebrew），然后刷新。"
+          }
+        }
+      }
+    },
+    "Installed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已安装"
+          }
+        }
+      }
+    },
+    "Installed %lld tools" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已安装 %lld 个工具"
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Installed %lld tool"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Installed %lld tools"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Installs with %@ after %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "等 %2$@ 装好后用 %1$@ 安装"
+          }
+        }
+      }
+    },
+    "My Mac" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的 Mac"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名称"
+          }
+        }
+      }
+    },
+    "Node.js Full Stack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Node 全栈"
+          }
+        }
+      }
+    },
+    "Node.js and pnpm with PostgreSQL, Redis and jq." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Node.js 与 pnpm，外加 PostgreSQL、Redis 和 jq。"
+          }
+        }
+      }
+    },
+    "Node.js with pnpm and Yarn, Deno, Git and GitHub CLI." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Node.js 与 pnpm、Yarn，外加 Deno、Git 和 GitHub CLI。"
+          }
+        }
+      }
+    },
+    "Note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "备注"
+          }
+        }
+      }
+    },
+    "Nothing to export" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有可导出的内容"
+          }
+        }
+      }
+    },
+    "Only packages you installed yourself through Homebrew, npm, pnpm, uv, pipx or Cargo are included. Dependencies, system tools, paths, environment variables and secrets never are." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "只包含你通过 Homebrew、npm、pnpm、uv、pipx 或 Cargo 主动安装的软件包。依赖项、系统自带工具、路径、环境变量和密钥一律不会写入。"
+          }
+        }
+      }
+    },
+    "Only your description and CLI State's list of known tools are sent. Nothing about this Mac is included." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "只会发送你的描述和 CLI State 的已知工具清单，不包含这台 Mac 的任何信息。"
+          }
+        }
+      }
+    },
+    "Open AI Settings…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开 AI 设置…"
+          }
+        }
+      }
+    },
+    "Open Another…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开其他文件…"
+          }
+        }
+      }
+    },
+    "Open Profile…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开配置文件…"
+          }
+        }
+      }
+    },
+    "Open an Environment Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开环境配置文件"
+          }
+        }
+      }
+    },
+    "Optional" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可选"
+          }
+        }
+      }
+    },
+    "PHP & Laravel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PHP / Laravel"
+          }
+        }
+      }
+    },
+    "PHP and Composer with MySQL, Redis, nginx and Node.js." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PHP 与 Composer，外加 MySQL、Redis、nginx 和 Node.js。"
+          }
+        }
+      }
+    },
+    "Pinned" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已锁定版本"
+          }
+        }
+      }
+    },
+    "Python & Data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Python / 数据"
+          }
+        }
+      }
+    },
+    "Python with uv, Ruff, JupyterLab, DuckDB and SQLite." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Python 与 uv、Ruff、JupyterLab，外加 DuckDB 和 SQLite。"
+          }
+        }
+      }
+    },
+    "Reading the latest scan…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在读取最近一次扫描…"
+          }
+        }
+      }
+    },
+    "Rust" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rust"
+          }
+        }
+      }
+    },
+    "Rust with rust-analyzer, cargo-nextest and ripgrep." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rust 与 rust-analyzer、cargo-nextest，外加 ripgrep。"
+          }
+        }
+      }
+    },
+    "Save Profile…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存配置文件…"
+          }
+        }
+      }
+    },
+    "Save what's installed on this Mac" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存这台 Mac 上安装的工具"
+          }
+        }
+      }
+    },
+    "Saved by a newer CLI State. Items this version doesn't understand are shown as Can't Install." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该文件由更新版本的 CLI State 保存。当前版本无法识别的条目会显示为“无法安装”。"
+          }
+        }
+      }
+    },
+    "Select All" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全选"
+          }
+        }
+      }
+    },
+    "Send" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送"
+          }
+        }
+      }
+    },
+    "Send to %@?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送给 %@？"
+          }
+        }
+      }
+    },
+    "Set up AI in Settings › AI to get suggestions." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在“设置 › AI”中配置后即可获得建议。"
+          }
+        }
+      }
+    },
+    "Show Suggestion" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示建议"
+          }
+        }
+      }
+    },
+    "Show exactly what's sent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "查看将要发送的完整内容"
+          }
+        }
+      }
+    },
+    "Start from a template" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从模板开始"
+          }
+        }
+      }
+    },
+    "Step %lld is running. CLI State continues with %@ after the rescan." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在进行第 %1$lld 步。重新扫描后，CLI State 会继续安装 %2$@ 的软件包。"
+          }
+        }
+      }
+    },
+    "Stop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止"
+          }
+        }
+      }
+    },
+    "Stop After This Step" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这一步后停止"
+          }
+        }
+      }
+    },
+    "Suggest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "生成建议"
+          }
+        }
+      }
+    },
+    "Suggested %lld tools. Review the checklist below." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建议了 %lld 个工具，请在下方核对清单。"
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Suggested %lld tool. Review the checklist below."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Suggested %lld tools. Review the checklist below."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Templates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模板"
+          }
+        }
+      }
+    },
+    "The answer didn't name any tool CLI State can install. Try describing your work differently." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回答里没有 CLI State 能安装的工具。换个方式描述你的工作再试试。"
+          }
+        }
+      }
+    },
+    "The package name isn't valid, so it's skipped" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "软件包名称无效，已跳过"
+          }
+        }
+      }
+    },
+    "Thinking…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在思考…"
+          }
+        }
+      }
+    },
+    "This version of CLI State can't install with %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前版本的 CLI State 不支持用 %@ 安装"
+          }
+        }
+      }
+    },
+    "To Install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "待安装"
+          }
+        }
+      }
+    },
+    "Version Differs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "版本不同"
+          }
+        }
+      }
+    },
+    "Via %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过 %@"
+          }
+        }
+      }
+    },
+    "Waiting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "等待中"
+          }
+        }
+      }
+    },
+    "What do you mainly develop?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你主要开发什么？"
+          }
+        }
+      }
+    },
+    "iOS & macOS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS / macOS"
+          }
+        }
+      }
+    },
+    "kubectl, Helm, k9s, Terraform and the AWS CLI." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kubectl、Helm、k9s、Terraform 和 AWS CLI。"
+          }
+        }
+      }
+    },
+    "npm comes with Node.js. Install Node.js first (for example Homebrew's node), then refresh." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "npm 随 Node.js 一起提供。先安装 Node.js（例如 Homebrew 的 node），然后刷新。"
+          }
+        }
+      }
+    },
+    "tap, brew and cask lines for `brew bundle`" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "供 `brew bundle` 使用的 tap、brew 和 cask 行"
+          }
+        }
+      }
+    },
+    "tool.summary.awscli" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Command-line interface for Amazon Web Services."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon Web Services 的命令行工具。"
+          }
+        }
+      }
+    },
+    "tool.summary.cargo-nextest" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next-generation test runner for Rust."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新一代 Rust 测试运行器。"
+          }
+        }
+      }
+    },
+    "tool.summary.cocoapods" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dependency manager for Swift and Objective-C projects."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swift 和 Objective-C 项目的依赖管理器。"
+          }
+        }
+      }
+    },
+    "tool.summary.duckdb" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In-process analytical SQL database."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "进程内运行的分析型 SQL 数据库。"
+          }
+        }
+      }
+    },
+    "tool.summary.fastlane" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automate building and releasing iOS and macOS apps."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动化构建和发布 iOS 与 macOS 应用。"
+          }
+        }
+      }
+    },
+    "tool.summary.golangci-lint" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast linters runner for Go."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快速运行多种 Go 代码检查器的工具。"
+          }
+        }
+      }
+    },
+    "tool.summary.gopls" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Official Go language server for editors."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go 官方的编辑器语言服务器。"
+          }
+        }
+      }
+    },
+    "tool.summary.helm" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Package manager for Kubernetes."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kubernetes 的包管理器。"
+          }
+        }
+      }
+    },
+    "tool.summary.jupyterlab" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Web-based notebooks for data science and scientific computing."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用于数据科学和科学计算的网页版笔记本。"
+          }
+        }
+      }
+    },
+    "tool.summary.k9s" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminal UI for managing Kubernetes clusters."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在终端里管理 Kubernetes 集群的界面。"
+          }
+        }
+      }
+    },
+    "tool.summary.kubectl" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Command-line tool for Kubernetes clusters."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "管理 Kubernetes 集群的命令行工具。"
+          }
+        }
+      }
+    },
+    "tool.summary.ruff" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extremely fast Python linter and code formatter."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速度极快的 Python 代码检查与格式化工具。"
+          }
+        }
+      }
+    },
+    "tool.summary.rust-analyzer" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language server for Rust."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rust 的语言服务器。"
+          }
+        }
+      }
+    },
+    "tool.summary.swiftformat" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code formatter for Swift."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swift 代码格式化工具。"
+          }
+        }
+      }
+    },
+    "tool.summary.swiftlint" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enforce Swift style and conventions."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "检查 Swift 代码风格与规范。"
+          }
+        }
+      }
+    },
+    "tool.summary.terraform" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Infrastructure as code from HashiCorp."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HashiCorp 出品的基础设施即代码工具。"
+          }
+        }
+      }
+    },
+    "tool.summary.xcbeautify" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Readable output for xcodebuild."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "让 xcodebuild 的输出更易读。"
+          }
+        }
+      }
+    },
+    "tool.summary.xcodes" : {
+      "comment" : "Registry tool summary; key is the registry id.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install and switch between Xcode versions."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装并切换不同版本的 Xcode。"
+          }
+        }
+      }
+    },
+    "xcodes, SwiftLint, SwiftFormat, xcbeautify, CocoaPods and fastlane." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "xcodes、SwiftLint、SwiftFormat、xcbeautify、CocoaPods 和 fastlane。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

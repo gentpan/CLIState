@@ -1,0 +1,7 @@
+Warning: You are using macOS 27.
+We do not provide support for this pre-release version.
+Warning: The following taps are not trusted:
+  ericjypark/tap
+  hudochenkov/sshpass
+
+Homebrew is currently ignoring formulae, casks and commands from these taps because tap trust is required.

@@ -1,0 +1,9 @@
+{
+  "@anthropic-ai/claude-code": {
+    "current": "2.1.236",
+    "latest": "2.1.270",
+    "wanted": "2.1.236",
+    "isDeprecated": false,
+    "dependencyType": "dependencies"
+  }
+}

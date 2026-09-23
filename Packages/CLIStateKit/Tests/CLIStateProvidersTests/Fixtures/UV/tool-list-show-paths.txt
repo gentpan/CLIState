@@ -1,0 +1,3 @@
+kimi-cli v1.49.0 (/Users/tester/.local/share/uv/tools/kimi-cli)
+- kimi (/Users/tester/.local/bin/kimi)
+- kimi-cli (/Users/tester/.local/bin/kimi-cli)

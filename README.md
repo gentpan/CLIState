@@ -82,6 +82,19 @@ Homebrew 6 需要先信任第三方 tap（`brew trust`）才能安装。
 - 附上诊断包能帮助定位问题：设置 › 关于 › 导出诊断包…。诊断包会把主目录替换成 `~`、抹掉账户名，不含环境变量和命令输出；上传前你也可以自行查看内容。
 - 安全问题请不要公开提交，使用本仓库的 [Security › Report a vulnerability](https://github.com/gentpan/CLIState/security/advisories/new)。
 
+## 从源码构建
+
+需要 macOS 15 或更高版本、Xcode、Swift 6 和 [XcodeGen](https://github.com/yonaskolb/XcodeGen)。
+
+```bash
+brew install xcodegen
+swift test --package-path Packages/CLIStateKit
+xcodegen generate
+xcodebuild -project CLIState.xcodeproj -scheme CLIState -derivedDataPath build build
+```
+
+更多开发约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。生成的 `CLIState.xcodeproj` 不提交。
+
 ---
 
-© 2026 GiantAccel, LLC. All rights reserved.
+© 2026 GiantAccel, LLC. 源码采用 MIT License；随附字体沿用各自目录中的 SIL Open Font License。

@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  package:
+    name: Swift package tests
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Test local delivery scripts
+        run: python3 -m unittest discover -s scripts/tests
+      - name: Test
+        run: swift test --package-path Packages/CLIStateKit
+
+  app:
+    name: App build and scheduler tests (unsigned)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Build and test
+        run: |
+          xcodegen generate
+          xcodebuild -project CLIState.xcodeproj -scheme CLIState -configuration Debug \
+            -derivedDataPath build -destination 'platform=macOS' \
+            CODE_SIGNING_ALLOWED=NO test
+      - name: Build Release
+        run: |
+          xcodebuild -project CLIState.xcodeproj -scheme CLIState -configuration Release \
+            -derivedDataPath build -destination 'generic/platform=macOS' \
+            CODE_SIGNING_ALLOWED=NO build

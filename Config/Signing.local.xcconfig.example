@@ -1,0 +1,5 @@
+// Copy to Signing.local.xcconfig (git-ignored) to sign with your own identity.
+// Find identities with: security find-identity -v -p codesigning
+DEVELOPMENT_TEAM = ABCDE12345
+CODE_SIGN_IDENTITY[config=Release] = Developer ID Application
+OTHER_CODE_SIGN_FLAGS[config=Release] = --timestamp

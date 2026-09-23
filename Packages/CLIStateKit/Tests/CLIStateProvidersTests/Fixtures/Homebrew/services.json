@@ -1,0 +1,37 @@
+[
+  {
+    "name": "caddy",
+    "status": "none",
+    "user": null,
+    "file": "/opt/homebrew/opt/caddy/homebrew.mxcl.caddy.plist",
+    "exit_code": null
+  },
+  {
+    "name": "colima",
+    "status": "none",
+    "user": null,
+    "file": "/opt/homebrew/opt/colima/homebrew.mxcl.colima.plist",
+    "exit_code": null
+  },
+  {
+    "name": "php",
+    "status": "none",
+    "user": null,
+    "file": "/opt/homebrew/opt/php/homebrew.mxcl.php.plist",
+    "exit_code": null
+  },
+  {
+    "name": "php@8.2",
+    "status": "none",
+    "user": null,
+    "file": "/opt/homebrew/opt/php@8.2/homebrew.mxcl.php@8.2.plist",
+    "exit_code": null
+  },
+  {
+    "name": "postgresql@17",
+    "status": "started",
+    "user": "tester",
+    "file": "/Users/tester/Library/LaunchAgents/homebrew.mxcl.postgresql@17.plist",
+    "exit_code": null
+  }
+]

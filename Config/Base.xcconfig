@@ -1,0 +1,9 @@
+// Shared by all configurations. Contributors build with ad-hoc signing;
+// release signing lives in Signing.local.xcconfig (not committed).
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = -
+DEVELOPMENT_TEAM =
+ENABLE_HARDENED_RUNTIME = YES
+OTHER_CODE_SIGN_FLAGS = --timestamp=none
+
+#include? "Signing.local.xcconfig"

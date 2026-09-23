@@ -1,0 +1,597 @@
+{
+  "formulae": [
+    {
+      "name": "aom",
+      "installed_versions": [
+        "3.14.0",
+        "3.14.1"
+      ],
+      "current_version": "3.15.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "apr-util",
+      "installed_versions": [
+        "1.6.3_1"
+      ],
+      "current_version": "1.6.5",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "cfitsio",
+      "installed_versions": [
+        "4.6.4"
+      ],
+      "current_version": "4.7.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "cgif",
+      "installed_versions": [
+        "0.5.3"
+      ],
+      "current_version": "0.5.4",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "composer",
+      "installed_versions": [
+        "2.9.8"
+      ],
+      "current_version": "2.10.3",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "curl",
+      "installed_versions": [
+        "8.20.0"
+      ],
+      "current_version": "8.22.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "dav1d",
+      "installed_versions": [
+        "1.5.3"
+      ],
+      "current_version": "1.5.4",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "docker",
+      "installed_versions": [
+        "29.6.1"
+      ],
+      "current_version": "29.8.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "docker-compose",
+      "installed_versions": [
+        "5.2.0"
+      ],
+      "current_version": "5.5.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "ffmpeg",
+      "installed_versions": [
+        "8.1.2_1"
+      ],
+      "current_version": "9.0.1_1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "fontconfig",
+      "installed_versions": [
+        "2.17.1",
+        "2.18.1",
+        "2.18.2"
+      ],
+      "current_version": "2.18.3",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "freetds",
+      "installed_versions": [
+        "1.5.17",
+        "1.5.18"
+      ],
+      "current_version": "1.5.19",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "gcc",
+      "installed_versions": [
+        "16.1.0"
+      ],
+      "current_version": "16.2.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "gdk-pixbuf",
+      "installed_versions": [
+        "2.44.7"
+      ],
+      "current_version": "2.44.8",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "gh",
+      "installed_versions": [
+        "2.92.0"
+      ],
+      "current_version": "2.100.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "gnupg",
+      "installed_versions": [
+        "2.5.21"
+      ],
+      "current_version": "2.5.22",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "gpgme",
+      "installed_versions": [
+        "2.1.2"
+      ],
+      "current_version": "2.2.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "gpgmepp",
+      "installed_versions": [
+        "2.1.0"
+      ],
+      "current_version": "2.2.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "harfbuzz",
+      "installed_versions": [
+        "14.3.0"
+      ],
+      "current_version": "14.4.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "imagemagick",
+      "installed_versions": [
+        "7.1.2-29"
+      ],
+      "current_version": "7.1.2-31",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "imath",
+      "installed_versions": [
+        "3.2.2"
+      ],
+      "current_version": "3.2.3",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libde265",
+      "installed_versions": [
+        "1.1.1"
+      ],
+      "current_version": "1.1.2",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libdeflate",
+      "installed_versions": [
+        "1.25"
+      ],
+      "current_version": "1.26",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libgcrypt",
+      "installed_versions": [
+        "1.12.2"
+      ],
+      "current_version": "1.12.4",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libgit2",
+      "installed_versions": [
+        "1.9.3"
+      ],
+      "current_version": "1.9.7",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libheif",
+      "installed_versions": [
+        "1.23.1"
+      ],
+      "current_version": "1.23.4",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libksba",
+      "installed_versions": [
+        "1.8.0"
+      ],
+      "current_version": "1.8.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libomp",
+      "installed_versions": [
+        "22.1.8"
+      ],
+      "current_version": "23.1.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libpq",
+      "installed_versions": [
+        "18.4"
+      ],
+      "current_version": "18.6",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "librsvg",
+      "installed_versions": [
+        "2.62.3"
+      ],
+      "current_version": "2.63.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libssh2",
+      "installed_versions": [
+        "1.11.1_1"
+      ],
+      "current_version": "1.11.1_4",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libultrahdr",
+      "installed_versions": [
+        "1.5.1"
+      ],
+      "current_version": "2.0.2",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libvpx",
+      "installed_versions": [
+        "1.16.0"
+      ],
+      "current_version": "1.17.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "libxml2",
+      "installed_versions": [
+        "2.15.3"
+      ],
+      "current_version": "2.15.4",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "lima",
+      "installed_versions": [
+        "2.1.3"
+      ],
+      "current_version": "2.2.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "little-cms2",
+      "installed_versions": [
+        "2.19"
+      ],
+      "current_version": "2.19.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "llvm",
+      "installed_versions": [
+        "22.1.4"
+      ],
+      "current_version": "23.1.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "merve",
+      "installed_versions": [
+        "1.2.2_1"
+      ],
+      "current_version": "1.2.2_2",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "mpg123",
+      "installed_versions": [
+        "1.33.6"
+      ],
+      "current_version": "1.33.7",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "node",
+      "installed_versions": [
+        "26.7.0"
+      ],
+      "current_version": "26.8.2",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "nspr",
+      "installed_versions": [
+        "4.39"
+      ],
+      "current_version": "4.40",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "nss",
+      "installed_versions": [
+        "3.126"
+      ],
+      "current_version": "3.129",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "openexr",
+      "installed_versions": [
+        "3.4.13_2"
+      ],
+      "current_version": "3.4.15",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "openldap",
+      "installed_versions": [
+        "2.6.13"
+      ],
+      "current_version": "2.7.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "p11-kit",
+      "installed_versions": [
+        "0.26.4"
+      ],
+      "current_version": "0.26.5",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "pandoc",
+      "installed_versions": [
+        "3.10.1"
+      ],
+      "current_version": "3.11",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "pango",
+      "installed_versions": [
+        "1.58.0"
+      ],
+      "current_version": "1.58.2",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "php",
+      "installed_versions": [
+        "8.5.7"
+      ],
+      "current_version": "8.5.10",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "php@8.2",
+      "installed_versions": [
+        "8.2.31"
+      ],
+      "current_version": "8.2.33",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "pkgconf",
+      "installed_versions": [
+        "2.5.1",
+        "3.0.5"
+      ],
+      "current_version": "3.0.7",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "poppler",
+      "installed_versions": [
+        "26.08.0"
+      ],
+      "current_version": "26.09.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "postgresql@17",
+      "installed_versions": [
+        "17.10"
+      ],
+      "current_version": "17.11",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "rclone",
+      "installed_versions": [
+        "1.74.4"
+      ],
+      "current_version": "1.75.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "rust",
+      "installed_versions": [
+        "1.95.0"
+      ],
+      "current_version": "1.98.1",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "sdl2-compat",
+      "installed_versions": [
+        "2.32.70"
+      ],
+      "current_version": "2.32.72",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "sdl3",
+      "installed_versions": [
+        "3.4.12"
+      ],
+      "current_version": "3.4.16",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "simdjson",
+      "installed_versions": [
+        "4.6.3",
+        "4.6.7"
+      ],
+      "current_version": "4.6.11",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "simdutf",
+      "installed_versions": [
+        "9.0.0"
+      ],
+      "current_version": "9.1.2",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "vips",
+      "installed_versions": [
+        "8.18.5"
+      ],
+      "current_version": "8.18.6",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "weasyprint",
+      "installed_versions": [
+        "69.0"
+      ],
+      "current_version": "70.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "x265",
+      "installed_versions": [
+        "4.2"
+      ],
+      "current_version": "4.3",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "xz",
+      "installed_versions": [
+        "5.8.3"
+      ],
+      "current_version": "5.8.4",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "z3",
+      "installed_versions": [
+        "4.15.4"
+      ],
+      "current_version": "5.1.0",
+      "pinned": false,
+      "pinned_version": null
+    }
+  ],
+  "casks": [
+    {
+      "name": "codexbar",
+      "installed_versions": [
+        "0.56.4"
+      ],
+      "current_version": "0.60.0",
+      "pinned": false,
+      "pinned_version": null
+    },
+    {
+      "name": "quotabar",
+      "installed_versions": [
+        "0.3.0"
+      ],
+      "current_version": "0.5.0",
+      "pinned": false,
+      "pinned_version": null
+    }
+  ]
+}

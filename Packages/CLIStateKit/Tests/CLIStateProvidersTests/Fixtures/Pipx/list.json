@@ -1,0 +1,101 @@
+{
+  "pipx_spec_version": "0.1",
+  "venvs": {
+    "black": {
+      "metadata": {
+        "injected_packages": {},
+        "main_package": {
+          "app_paths": [
+            {
+              "__Path__": "/Users/tester/.local/pipx/venvs/black/bin/black",
+              "__type__": "Path"
+            },
+            {
+              "__Path__": "/Users/tester/.local/pipx/venvs/black/bin/blackd",
+              "__type__": "Path"
+            }
+          ],
+          "app_paths_of_dependencies": {},
+          "apps": ["black", "blackd"],
+          "apps_of_dependencies": [],
+          "include_apps": true,
+          "include_dependencies": false,
+          "man_pages": [],
+          "man_pages_of_dependencies": [],
+          "man_paths": [],
+          "man_paths_of_dependencies": {},
+          "package": "black",
+          "package_or_url": "black",
+          "package_version": "24.10.0",
+          "pinned": false,
+          "pip_args": [],
+          "suffix": ""
+        },
+        "pipx_metadata_version": "0.5",
+        "python_version": "Python 3.13.1",
+        "source_interpreter": {
+          "__Path__": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+          "__type__": "Path"
+        },
+        "venv_args": []
+      }
+    },
+    "jupyterlab": {
+      "metadata": {
+        "injected_packages": {
+          "jupyterlab-git": {
+            "package": "jupyterlab-git",
+            "package_version": "0.50.2"
+          }
+        },
+        "main_package": {
+          "app_paths": [
+            {
+              "__Path__": "/Users/tester/.local/pipx/venvs/jupyterlab/bin/jupyter-lab",
+              "__type__": "Path"
+            }
+          ],
+          "app_paths_of_dependencies": {
+            "notebook-shim": [],
+            "jupyter-core": [
+              {
+                "__Path__": "/Users/tester/.local/pipx/venvs/jupyterlab/bin/jupyter",
+                "__type__": "Path"
+              }
+            ]
+          },
+          "apps": ["jupyter-lab"],
+          "apps_of_dependencies": ["jupyter"],
+          "include_dependencies": true,
+          "package": "jupyterlab",
+          "package_or_url": "jupyterlab",
+          "package_version": "4.3.4",
+          "pinned": true,
+          "suffix": ""
+        },
+        "pipx_metadata_version": "0.5",
+        "python_version": "Python 3.12.8"
+      }
+    },
+    "poetry": {
+      "metadata": {
+        "main_package": {
+          "app_paths": [
+            {
+              "__Path__": "/Users/tester/.local/pipx/venvs/poetry/bin/poetry",
+              "__type__": "Path"
+            }
+          ],
+          "apps": ["poetry"],
+          "future_field": {"nested": [1, 2, 3]},
+          "package": "poetry",
+          "package_version": "2.0.1"
+        },
+        "pipx_metadata_version": "0.9",
+        "unknown_metadata": true
+      },
+      "unknown_venv_field": "ignored"
+    }
+  },
+  "unknown_top_level": [null]
+}

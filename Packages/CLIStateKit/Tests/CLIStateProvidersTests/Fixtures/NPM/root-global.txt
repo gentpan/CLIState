@@ -1,0 +1,1 @@
+/Users/tester/.local/opt/node-v26.2.0-darwin-arm64/lib/node_modules

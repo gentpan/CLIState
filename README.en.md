@@ -82,6 +82,19 @@ Requires macOS 15 or later, Apple Silicon or Intel.
 - A diagnostics bundle helps a lot: Settings › About › Export Diagnostics…. It replaces your home folder with `~`, removes your account name, and contains no environment variables or command output — review it before attaching.
 - Please report security issues privately via [Security › Report a vulnerability](https://github.com/gentpan/CLIState/security/advisories/new).
 
+## Build from source
+
+Requires macOS 15 or later, Xcode, Swift 6 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+
+```bash
+brew install xcodegen
+swift test --package-path Packages/CLIStateKit
+xcodegen generate
+xcodebuild -project CLIState.xcodeproj -scheme CLIState -derivedDataPath build build
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development notes. The generated `CLIState.xcodeproj` is not committed.
+
 ---
 
-© 2026 GiantAccel, LLC. All rights reserved.
+© 2026 GiantAccel, LLC. Source code is licensed under MIT; bundled fonts retain the SIL Open Font License in their respective directories.

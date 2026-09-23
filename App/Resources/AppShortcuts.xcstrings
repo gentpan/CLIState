@@ -1,0 +1,99 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Check for CLI updates with ${applicationName}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Check for CLI updates with ${applicationName}",
+              "Which CLI tools can I update in ${applicationName}"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "用${applicationName}检查 CLI 更新",
+              "${applicationName}检查命令行工具更新",
+              "${applicationName}里有哪些命令行工具可以更新"
+            ]
+          }
+        }
+      }
+    },
+    "Look up a command in ${applicationName}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Look up a command in ${applicationName}"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "在${applicationName}中查询命令",
+              "用${applicationName}查询命令"
+            ]
+          }
+        }
+      }
+    },
+    "Open ${tool} in ${applicationName}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Open ${tool} in ${applicationName}",
+              "Show a tool in ${applicationName}"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "在${applicationName}中打开${tool}",
+              "在${applicationName}中查看工具"
+            ]
+          }
+        }
+      }
+    },
+    "Scan my development environment with ${applicationName}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "Scan my development environment with ${applicationName}",
+              "Scan CLI tools with ${applicationName}"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "用${applicationName}扫描开发环境",
+              "${applicationName}扫描开发环境",
+              "用${applicationName}扫描命令行工具"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

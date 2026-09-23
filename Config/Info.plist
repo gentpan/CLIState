@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Sparkle: appcast published as a release asset of the public gentpan/CLIState repo.
+         SUPublicEDKey is the public half of the EdDSA key created with
+         generate_keys for account clistate; the private half stays in the publisher's keychain. -->
+    <!-- Product name is "CLI State" (user decision); the bundle stays CLIState.app.
+         Finder, Dock and Launchpad show the localized CFBundleDisplayName from
+         InfoPlist.xcstrings only when this is set and the unlocalized value matches
+         the bundle file name, so project.yml keeps CFBundleDisplayName = CLIState. -->
+    <key>LSHasLocalizedDisplayName</key>
+    <true/>
+    <key>SUFeedURL</key>
+    <string>https://github.com/gentpan/CLIState/releases/latest/download/appcast.xml</string>
+    <key>CLIStateUpdateServerFeedURL</key>
+    <string>https://update.clistate.com/appcast.xml</string>
+    <key>SUPublicEDKey</key>
+    <string>fxSBQ+bupD8G0Vzr6j5DiWww1D031N9NyCJlOsunyIc=</string>
+    <key>SUEnableAutomaticChecks</key>
+    <true/>
+    <!-- Environment restore profiles (Lane N), saved as `<name>.clistate-profile.json`. -->
+    <key>UTExportedTypeDeclarations</key>
+    <array>
+        <dict>
+            <key>UTTypeIdentifier</key>
+            <string>com.clistate.environment-profile</string>
+            <key>UTTypeDescription</key>
+            <string>CLI State Environment Profile</string>
+            <key>UTTypeConformsTo</key>
+            <array>
+                <string>public.json</string>
+            </array>
+            <key>UTTypeTagSpecification</key>
+            <dict>
+                <key>public.filename-extension</key>
+                <array>
+                    <string>clistate-profile</string>
+                </array>
+                <key>public.mime-type</key>
+                <string>application/json</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>

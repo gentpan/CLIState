@@ -1,0 +1,11 @@
+Would remove: /opt/homebrew/Cellar/ada-url/3.4.4 (55 files, 1.3MB)
+Would remove: /opt/homebrew/Cellar/ca-certificates/2026-03-19 (4 files, 237.5KB)
+Would remove: /opt/homebrew/Cellar/openssl@3/3.6.2 (7,627 files, 37.6MB)
+Would remove: /opt/homebrew/Cellar/openssl@3/3.6.3 (7,633 files, 37.6MB)
+Would remove: /opt/homebrew/Cellar/python@3.14/3.14.4_1 (4,343 files, 86.9MB)
+Would remove: /opt/homebrew/var/homebrew/tmp/.cellar/harfbuzz (95 files, 13.3MB)
+Would remove (broken link): /opt/homebrew/bin/codexbar
+Would remove (empty directory): /opt/homebrew/lib/gio
+Would remove: /Users/tester/Library/Logs/Homebrew/php (64B)
+Would remove: /opt/homebrew/Library/Homebrew/vendor/portable-ruby/4.0.3 (1,704 files, 34.6MB)
+==> This operation would free approximately 303.8MB of disk space.

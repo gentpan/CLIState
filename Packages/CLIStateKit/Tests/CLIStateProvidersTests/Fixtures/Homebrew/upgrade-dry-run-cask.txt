@@ -1,0 +1,2 @@
+==> Would upgrade 1 requested outdated package
+codexbar 0.56.4 -> 0.60.0

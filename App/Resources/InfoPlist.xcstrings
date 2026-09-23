@@ -1,0 +1,42 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Product name shown in Finder, the Dock, the menu bar and About. The bundle stays CLIState.app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLI State"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLI State"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Product name shown in Finder, the Dock, the menu bar and About. The bundle stays CLIState.app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLI State"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLI State"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
