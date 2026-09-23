@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 工具页分类改为紧凑的原生分段选择控件，缩小筛选按钮，窄窗口自动切换为分类菜单。
+- Tools categories now use a compact native segmented control, with a smaller filter button and a category menu for narrow windows.
 - 对齐侧边栏首行与概览首张卡片的顶部位置。
 - Aligned the first sidebar row with the top edge of the first Overview card.
 - 浅色外观统一白色画布与灰色卡片；深色外观使用炭灰画布，并将侧边栏选中态改为整行圆角块。

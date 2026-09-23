@@ -38,7 +38,7 @@ extension ToolFilter.Status {
     }
 }
 
-/// Category chips on the left, "Installed via" and state menus on the right.
+/// Category selection on the left, "Installed via" and state menus on the right.
 /// Replaces the category picker in the toolbar and the per-category and
 /// per-provider sidebar rows.
 struct ToolFilterBar: View {
@@ -49,15 +49,15 @@ struct ToolFilterBar: View {
 
     var body: some View {
         HStack(spacing: DS.Space.s3) {
-            // Chips when they all fit; a category menu otherwise, so no chip is ever cut in half.
+            // Show the native segmented picker when it fits and a menu otherwise.
             // Drawn as an overlay: switching between the two must not change the
             // column's minimum width, or the split view re-lays out endlessly.
             Color.clear
                 .frame(maxWidth: .infinity)
-                .frame(height: DS.ControlHeight.small + DS.Space.s2)
+                .frame(height: DS.ControlHeight.small)
                 .overlay(alignment: .leading) {
                     ViewThatFits(in: .horizontal) {
-                        chips
+                        categoryTabs
                         categoryMenu
                     }
                 }
@@ -76,11 +76,20 @@ struct ToolFilterBar: View {
 
     // MARK: Categories
 
-    private var chips: some View {
-        DSTabs(selection: Binding(get: { filter.category }, set: { value in update { $0.category = value } }), options: [nil] + categories.map(Optional.some), title: String(localized: "Category")) { category in
-            let title = category?.pluralTitle ?? String(localized: "All")
-            return "\(title)  \(count(category: category))"
+    private var categoryTabs: some View {
+        Picker(selection: Binding(get: { filter.category }, set: { value in update { $0.category = value } })) {
+            Text(verbatim: "\(String(localized: "All")) \(count(category: nil))")
+                .tag(ToolCategory?.none)
+            ForEach(categories, id: \.self) { category in
+                Text(verbatim: "\(category.pluralTitle) \(count(category: category))")
+                    .tag(ToolCategory?.some(category))
+            }
+        } label: {
+            Text("Category")
         }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .frame(minHeight: DS.ControlHeight.small)
         .fixedSize(horizontal: true, vertical: false)
     }
 
@@ -96,7 +105,7 @@ struct ToolFilterBar: View {
         .pickerStyle(.menu)
         .labelsHidden()
         .fixedSize()
-        .padding(.vertical, DS.Space.s1)
+        .frame(minHeight: DS.ControlHeight.small)
     }
 
     /// Categories present in the current search, in their natural order. The
@@ -114,7 +123,7 @@ struct ToolFilterBar: View {
 
     // MARK: Menu
 
-    /// "Installed via" and state share one menu so the category chips keep the room.
+    /// "Installed via" and state share one menu so categories keep the room.
     /// Keep the trigger compact so active filters never squeeze the category controls.
     private var filterMenu: some View {
         let providers = providerCounts
@@ -161,7 +170,8 @@ struct ToolFilterBar: View {
             .font(DS.Font.body)
         }
         .menuStyle(.borderedButton)
-        .modifier(DSGlassButton(compact: true))
+        .controlSize(.small)
+        .frame(minHeight: DS.ControlHeight.small)
         .fixedSize()
         .help(Text("Filter by installer or state"))
         .accessibilityLabel(Text("Filter"))
