@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.2
+
+**改进与修复 / Improvements and fixes**
+- 统一浅色与深色界面：侧边栏和内容区共用底色，灰色卡片承载内容，页内切换与操作采用 macOS 原生控件。
+- Refined light and dark appearances with a shared sidebar and content canvas, gray cards, and native macOS controls.
+- 重构工具、更新、问题、清理和设置页面，收紧表头、摘要与按钮布局，改善窄窗口显示。
+- Refined Tools, Updates, Issues, Cleanup and Settings layouts, including compact headers and narrow windows.
+- 修复清理一项后剩余项目消失的问题，并在卸载 Homebrew 软件前检查已安装的依赖项。
+- Fixed disappearing Cleanup results after a removal and added installed-dependent checks before Homebrew uninstall.
+- 问题页说明无法自动处理的原因及具体处理步骤，支持集中定位非系统的残留链接，保护 macOS 管理的链接。
+- Issues explain why automatic repair is unavailable, show practical next steps, and locate non-system leftovers while protecting macOS-managed links.
+- 公开完整应用源码、构建说明与 MIT 许可证；App 更新继续支持官方服务器和 GitHub。
+- Published the complete app source, build instructions and MIT license; app updates continue through the official server and GitHub.
+
 ## 0.2.1
 
 **新增 / Added**
