@@ -1,10 +1,7 @@
 import SwiftUI
 
-/// Vertical navigation with a glowing "glider" that springs to the selected row
-/// (adapted from Uiverse.io radio glider by Smit-Prajapati, recolored to brand
-/// blue). Gradients and glow are a deliberate, user-requested exception to the
-/// flat design rules; they are confined to this component.
-struct GliderNavigation<ID: Hashable>: View {
+/// Sidebar rows share the window canvas; selection and hover use neutral fills.
+struct SidebarNavigation<ID: Hashable>: View {
     struct Item: Identifiable {
         var id: ID
         var title: LocalizedStringKey
@@ -21,8 +18,7 @@ struct GliderNavigation<ID: Hashable>: View {
         var items: [Item]
     }
 
-    /// A row in the same style that performs an action instead of selecting,
-    /// e.g. opening the Settings window. Never selected, skipped by arrow keys.
+    /// A row that performs an action instead of selecting, such as Settings.
     struct Action: Identifiable {
         var id: String
         var title: LocalizedStringKey
@@ -33,10 +29,8 @@ struct GliderNavigation<ID: Hashable>: View {
 
     let groups: [Group]
     @Binding var selection: ID?
-    /// Pinned below the last group, at the bottom of the column when there's room.
     var footer: [Action] = []
 
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isFocused: Bool
 
     var body: some View {
@@ -48,13 +42,13 @@ struct GliderNavigation<ID: Hashable>: View {
                             Text(title)
                                 .font(DS.Font.caption)
                                 .foregroundStyle(DS.Palette.textTertiary)
-                                .padding(.leading, DS.Glider.labelInset)
+                                .padding(.leading, DS.Space.s3)
                                 .padding(.top, DS.Space.s4)
                                 .padding(.bottom, DS.Space.s1)
                                 .accessibilityAddTraits(.isHeader)
                         }
                         ForEach(group.items) { item in
-                            GliderRow(
+                            SidebarRow(
                                 title: item.title,
                                 symbol: item.symbol,
                                 badge: item.badge,
@@ -64,51 +58,27 @@ struct GliderNavigation<ID: Hashable>: View {
                             ) {
                                 selection = item.id
                             }
-                            .anchorPreference(key: GliderAnchorKey.self, value: .bounds) { anchor in
-                                item.id == selection ? anchor : nil
-                            }
                         }
                     }
                     if !footer.isEmpty {
                         Spacer(minLength: DS.Space.s4)
                         ForEach(footer) { action in
-                            GliderRow(title: action.title, symbol: action.symbol, accessibilityHint: action.accessibilityHint, action: action.perform)
+                            SidebarRow(title: action.title, symbol: action.symbol, accessibilityHint: action.accessibilityHint, action: action.perform)
                         }
                     }
                 }
                 .padding(.vertical, DS.Space.s3)
-                .padding(.leading, DS.Glider.railInset)
-                .padding(.trailing, DS.Space.s3)
+                .padding(.horizontal, DS.Space.s2)
                 .frame(minHeight: viewport.size.height, alignment: .top)
-                .overlayPreferenceValue(GliderAnchorKey.self) { anchor in
-                    GeometryReader { proxy in
-                        ZStack(alignment: .topLeading) {
-                            if let anchor {
-                                let rect = proxy[anchor]
-                                GliderIndicator()
-                                    .frame(height: rect.height)
-                                    .offset(y: rect.minY)
-                                    .animation(gliderAnimation, value: rect.minY)
-                            }
-                        }
-                        .offset(x: DS.Glider.railInset)
-                    }
-                    .allowsHitTesting(false)
-                }
             }
             .scrollIndicators(.never)
         }
-        .background(DS.Palette.panelPrimary)
+        .background(DS.Palette.background)
         .focusable()
         .focused($isFocused)
         .focusEffectDisabled()
         .onKeyPress(.upArrow) { move(by: -1) }
         .onKeyPress(.downArrow) { move(by: 1) }
-    }
-
-    /// Overshooting spring, the SwiftUI counterpart of `cubic-bezier(0.37, 1.95, 0.66, 0.56)`.
-    private var gliderAnimation: Animation {
-        reduceMotion ? .easeInOut(duration: DS.Motion.short) : .spring(response: DS.Glider.springResponse, dampingFraction: DS.Glider.springDamping)
     }
 
     private func move(by offset: Int) -> KeyPress.Result {
@@ -121,13 +91,12 @@ struct GliderNavigation<ID: Hashable>: View {
     }
 }
 
-private struct GliderRow: View {
+private struct SidebarRow: View {
     let title: LocalizedStringKey
     let symbol: String
     var badge: Int?
     var isSelected = false
     var accessibilityLabel: Text?
-    /// Spoken instead of the bare badge number.
     var accessibilityValue: Text?
     var accessibilityHint: Text?
     let action: () -> Void
@@ -149,65 +118,33 @@ private struct GliderRow: View {
                     Text(badge, format: .number)
                         .font(DS.Font.caption)
                         .monospacedDigit()
-                        .foregroundStyle(isSelected ? DS.Palette.highlight : DS.Palette.textTertiary)
+                        .foregroundStyle(DS.Palette.textTertiary)
                 }
             }
-            .foregroundStyle(foreground)
-            .padding(.leading, DS.Glider.labelInset - DS.Glider.railInset)
+            .foregroundStyle(isSelected || isHovered ? DS.Palette.textPrimary : DS.Palette.textSecondary)
+            .padding(.horizontal, DS.Space.s3)
             .padding(.vertical, DS.Space.s2)
-            .contentShape(Rectangle())
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(fill, in: RoundedRectangle(cornerRadius: DS.Radius.base))
+            .contentShape(RoundedRectangle(cornerRadius: DS.Radius.base))
         }
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
-        .animation(reduceMotion ? nil : .easeInOut(duration: DS.Motion.short), value: isSelected)
-        .animation(reduceMotion ? nil : .easeInOut(duration: DS.Motion.short), value: isHovered)
+        .animation(reduceMotion ? nil : DS.Motion.standard, value: isSelected)
+        .animation(reduceMotion ? nil : DS.Motion.standard, value: isHovered)
         .accessibilityLabel(accessibilityLabel ?? Text(title))
         .accessibilityValue(accessibilityValueText)
         .accessibilityHint(accessibilityHint ?? Text(verbatim: ""))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
+    private var fill: Color {
+        if isSelected { return DS.Palette.navigationSelection }
+        return isHovered ? DS.Palette.navigationHover : .clear
+    }
+
     private var accessibilityValueText: Text {
         guard let badge, badge > 0 else { return Text(verbatim: "") }
         return accessibilityValue ?? Text(badge, format: .number)
-    }
-
-    private var foreground: Color {
-        if isSelected { return DS.Palette.highlight }
-        return isHovered ? DS.Palette.textPrimary : DS.Palette.textSecondary
-    }
-}
-
-/// The moving part: a vertical light bar, a blurred glow behind it and a soft
-/// horizontal wash that fades into the row.
-private struct GliderIndicator: View {
-    @Environment(\.colorScheme) private var colorScheme
-
-    var body: some View {
-        let isDark = colorScheme == .dark
-        ZStack(alignment: .leading) {
-            LinearGradient(colors: [DS.Palette.primary.opacity(isDark ? DS.Glider.washOpacity : DS.Glider.washOpacityLight), .clear], startPoint: .leading, endPoint: .trailing)
-                .frame(width: DS.Glider.washWidth)
-
-            GeometryReader { proxy in
-                Rectangle()
-                    .fill(DS.Palette.primary.opacity(isDark ? 1 : DS.Glider.glowOpacityLight))
-                    .frame(width: DS.Glider.glowWidth, height: proxy.size.height * DS.Glider.glowHeightRatio)
-                    .blur(radius: DS.Glider.glowBlur)
-                    .frame(maxHeight: .infinity)
-            }
-            .frame(width: DS.Glider.glowWidth)
-
-            LinearGradient(colors: [.clear, DS.Palette.highlight, .clear], startPoint: .top, endPoint: .bottom)
-                .frame(width: DS.Glider.barWidth)
-        }
-    }
-}
-
-private struct GliderAnchorKey: PreferenceKey {
-    static let defaultValue: Anchor<CGRect>? = nil
-
-    static func reduce(value: inout Anchor<CGRect>?, nextValue: () -> Anchor<CGRect>?) {
-        value = value ?? nextValue()
     }
 }

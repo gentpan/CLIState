@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 浅色外观统一白色画布与灰色卡片；深色外观使用炭灰画布，并将侧边栏选中态改为整行圆角块。
+- Unified white canvas and gray cards in Light mode, with a charcoal Dark mode and rounded full-row sidebar selection.
 - 统一页面标题、原生 Liquid Glass 按钮、表单、筛选与程序字体；优化列表和可关闭的详情面板。
 - Consistent page titles, native Liquid Glass controls on macOS 26+, typography, filters and dismissible inspectors.
 - 单个更新不再触发完整软件包信息刷新；批量更新先检查新数据，操作后重新扫描。

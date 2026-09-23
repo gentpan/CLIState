@@ -6,7 +6,7 @@ struct SidebarView: View {
     @Environment(\.openSettings) private var openSettings
 
     var body: some View {
-        GliderNavigation(groups: groups, selection: selection, footer: [
+        SidebarNavigation(groups: groups, selection: selection, footer: [
             .init(id: "settings", title: "Settings", symbol: Symbol.settings, accessibilityHint: Text("Opens the Settings window")) {
                 openSettings.bringToFront()
             },
@@ -15,7 +15,7 @@ struct SidebarView: View {
 
     /// Task-oriented pages only. Categories and "Installed via" are filters on
     /// the Tools page, so they no longer repeat here.
-    private var groups: [GliderNavigation<AppRoute>.Group] {
+    private var groups: [SidebarNavigation<AppRoute>.Group] {
         let updateCount = model.updateItems.count
         let issueCount = model.issues.count
         return [

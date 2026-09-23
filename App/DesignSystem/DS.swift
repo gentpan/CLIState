@@ -100,31 +100,31 @@ enum DS {
         static let standaloneIcon = SwiftUI.Font.system(size: TextSize.lg)
     }
 
-    /// Black, white and blue (user decision, 2026-09-13), #1464F6 as the one brand
-    /// color. Every token resolves per appearance (Settings › General › Appearance:
-    /// System, Light or Dark): pure black ground with white text in Dark, white
-    /// ground with near-black text in Light. Neutrals carry no color cast;
+    /// A shared canvas for the sidebar and content, with neutral cards above it.
+    /// Every token resolves per appearance (Settings › General › Appearance:
+    /// System, Light or Dark). Blue is reserved for actions and links;
     /// green/orange/red appear only on small status icons and labels.
     enum Palette {
-        /// Window content ground.
-        static let background = Color(light: 0xFFFFFF, dark: 0x000000)
-        /// Sidebar, inspector, cards, table headers.
-        static let panelPrimary = Color(light: 0xF7F7F8, dark: 0x0A0A0A)
-        /// Hover, selected rows, inputs, code blocks, sheet body, nested blocks.
-        static let panelSecondary = Color(light: 0xEFEFF1, dark: 0x141414)
+        /// Unified window and sidebar canvas.
+        static let background = Color(light: 0xFFFFFF, dark: 0x1C1C1E)
+        /// Cards, inspector, table headers and sheet bodies.
+        static let panelPrimary = Color(light: 0xF3F3F4, dark: 0x262628)
+        /// Inputs, code blocks and nested surfaces.
+        static let panelSecondary = Color(light: 0xEAEAEC, dark: 0x303034)
+        /// Sidebar row states stay neutral in both appearances.
+        static let navigationSelection = Color(light: 0xEEEEF0, dark: 0x303034)
+        static let navigationHover = Color(light: 0xF5F5F6, dark: 0x262628)
         /// Borders and separators.
-        static let border = Color(light: 0xE2E2E5, dark: 0x262626)
+        static let border = Color(light: 0xE3E3E6, dark: 0x38383C)
 
         static let textPrimary = Color(light: 0x0A0A0A, dark: 0xFFFFFF)
-        static let textSecondary = Color(light: 0x5C5C63, dark: 0xA1A1A1)
+        static let textSecondary = Color(light: 0x5C5C63, dark: 0xB4B4BA)
         /// Disabled text, captions, PATH index numbers. Not for important text on `panelSecondary`.
-        static let textTertiary = Color(light: 0x8E8E93, dark: 0x6E6E6E)
+        static let textTertiary = Color(light: 0x8E8E93, dark: 0x919197)
 
-        /// Brand blue: button fills (with `onAccent` text), selection bars, focus rings.
-        /// Too dark for small text on black (4.2:1) — use `highlight` for blue text and icons.
+        /// Brand blue: button fills (with `onAccent` text) and focus rings.
         static let primary = Color(hex: 0x1464F6)
-        /// Blue text, links and icons (5.6:1 on black, 6.4:1 on white); pressed/hover
-        /// state of primary buttons.
+        /// Blue text, links and icons; pressed/hover state of primary buttons.
         static let highlight = Color(light: 0x0F52CC, dark: 0x3D82F8)
         /// Text and icons on `primary` and `error` fills and on emphasized table selection.
         static let onAccent = Color(hex: 0xFFFFFF)
@@ -166,28 +166,6 @@ enum DS {
         static let short: Double = 0.3
     }
 
-    /// Sidebar glider (user-requested style, recolored to brand blue).
-    enum Glider {
-        /// Distance from the column edge to the rail, like the original `padding-left: 0.5rem`.
-        static let railInset: CGFloat = 8
-        static let railWidth: CGFloat = 1
-        /// Where row labels start, measured from the column edge.
-        static let labelInset: CGFloat = 24
-        static let barWidth: CGFloat = 2
-        /// Glow is 300% of the bar width and 60% of the row height, blurred 10 pt.
-        static let glowWidth: CGFloat = 6
-        static let glowHeightRatio: CGFloat = 0.6
-        static let glowBlur: CGFloat = 10
-        /// Soft wash that fades into the row (`#1464F61c` ≈ 11%).
-        static let washWidth: CGFloat = 148
-        static let washOpacity: Double = 0.11
-        /// Blue reads much stronger on white, so Light halves the wash and softens the glow.
-        static let washOpacityLight: Double = 0.06
-        static let glowOpacityLight: Double = 0.45
-        /// Overshooting spring, close to `cubic-bezier(0.37, 1.95, 0.66, 0.56)` over 0.5 s.
-        static let springResponse: Double = 0.5
-        static let springDamping: Double = 0.55
-    }
 }
 
 extension Color {
