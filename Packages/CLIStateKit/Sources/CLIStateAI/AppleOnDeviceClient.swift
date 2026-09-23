@@ -73,6 +73,7 @@ public struct AppleOnDeviceClient: AIClient {
     static func map(_ error: any Error) -> AIError {
         if let error = error as? AIError { return error }
         if error is CancellationError { return AIError(.cancelled) }
+        #if compiler(>=6.4)
         if #available(macOS 27.0, *) {
             if let error = error as? LanguageModelError {
                 return switch error {
@@ -87,6 +88,7 @@ public struct AppleOnDeviceClient: AIClient {
             }
             if error is SystemLanguageModel.Error { return AIError(.onDeviceUnavailable(.modelNotReady)) }
         }
+        #endif
         if let error = error as? LanguageModelSession.GenerationError {
             return mapLegacy(error)
         }
