@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 将概览、发现、历史、清理、环境迁移、设置及工具详情的切换项统一为原生 macOS 分段控件，并将玻璃操作按钮调整为标准尺寸。
+- Native macOS segmented controls now unify in-page choices across the app; glass action buttons use the standard control size.
 - 工具页分类改为紧凑的原生分段选择控件，缩小筛选按钮，窄窗口自动切换为分类菜单。
 - Tools categories now use a compact native segmented control, with a smaller filter button and a category menu for narrow windows.
 - 对齐侧边栏首行与概览首张卡片的顶部位置。

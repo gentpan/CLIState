@@ -96,16 +96,17 @@ extension PrimitiveButtonStyle where Self == DSButtonStyle {
     static var dsDestructive: DSButtonStyle { DSButtonStyle(kind: .destructive) }
 }
 
-/// Native glass for primary controls, with a compact variant for list actions.
+/// Native glass at standard macOS control size.
 struct DSGlassButton: ViewModifier {
     var prominent = false
-    var compact = false
     @ViewBuilder func body(content: Content) -> some View {
         if #available(macOS 26.0, *) {
             if prominent {
-                content.buttonStyle(.glassProminent).buttonBorderShape(.capsule).controlSize(compact ? .regular : .large)
+                content.buttonStyle(.glassProminent).buttonBorderShape(.capsule).controlSize(.regular)
+                    .frame(minHeight: DS.ControlHeight.regular)
             } else {
-                content.buttonStyle(.glass).buttonBorderShape(.capsule).controlSize(compact ? .regular : .large).tint(nil as Color?)
+                content.buttonStyle(.glass).buttonBorderShape(.capsule).controlSize(.regular).tint(nil as Color?)
+                    .frame(minHeight: DS.ControlHeight.regular)
             }
         } else {
             if prominent { content.buttonStyle(.dsPrimary) }

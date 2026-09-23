@@ -287,11 +287,11 @@ private struct UpdateRow: View {
     private var actions: some View {
         HStack(spacing: DS.Space.s2) {
             if isSkipped {
-                Button("Stop Skipping") { model.unskip(item) }.modifier(DSGlassButton(compact: true))
+                Button("Stop Skipping") { model.unskip(item) }.modifier(DSGlassButton())
             } else {
-                Button("Skip This Version") { model.skip(item) }.modifier(DSGlassButton(compact: true))
+                Button("Skip This Version") { model.skip(item) }.modifier(DSGlassButton())
                 Button("Update") { model.requestUpdate([item.ref]) }
-                    .modifier(DSGlassButton(compact: true))
+                    .modifier(DSGlassButton())
                     .disabled(!ToolActionsAvailable.canUpdate(item.installation) || model.isPreparingOperation)
                     .accessibilityLabel(Text("Update \(item.tool.identity.displayName)"))
             }

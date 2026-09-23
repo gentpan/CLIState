@@ -143,7 +143,7 @@ struct OverviewView: View {
                         .buttonStyle(.plain)
                         InstalledViaLabel(provider: item.provider, font: DS.Font.caption)
                         Button("Update") { model.requestUpdate([item.ref]) }
-                            .modifier(DSGlassButton(compact: true))
+                            .modifier(DSGlassButton())
                             .disabled(!ToolActionsAvailable.canUpdate(item.installation) || model.isPreparingOperation)
                             .accessibilityLabel(Text("Update \(item.tool.identity.displayName)"))
                     }

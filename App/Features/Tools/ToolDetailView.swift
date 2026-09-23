@@ -64,7 +64,7 @@ struct ToolDetailView: View {
                         .labelStyle(.iconOnly)
                 }
                 .menuStyle(.borderedButton)
-                .modifier(DSGlassButton(compact: true))
+                .modifier(DSGlassButton())
                 .menuIndicator(.hidden)
                 .fixedSize()
                 .help(Text(verbatim: ToolMenuText.moreActions))
@@ -510,7 +510,7 @@ private struct InstallationCard: View {
             Label("Remove", systemImage: Symbol.uninstall)
         }
         .menuStyle(.borderedButton)
-        .modifier(DSGlassButton(compact: true))
+        .modifier(DSGlassButton())
         .fixedSize()
     }
 

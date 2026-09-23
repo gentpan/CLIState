@@ -13,25 +13,23 @@ struct DSTabs<Value: Hashable>: View {
             ScrollView(.horizontal) { segments }
                 .scrollIndicators(.hidden)
         }
-        .padding(DS.Space.s1)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(Text(verbatim: title))
     }
 
     private var segments: some View {
-        HStack(spacing: DS.Space.s1) {
+        Picker(selection: $selection) {
             ForEach(options, id: \.self) { option in
-                Button { selection = option } label: {
-                    Text(verbatim: label(option))
-                        .font(DS.Font.body)
-                        .fixedSize(horizontal: true, vertical: false)
-                        .padding(.horizontal, DS.Space.s3)
-                        .frame(maxWidth: .infinity, minHeight: DS.ControlHeight.regular)
-                }
-                .buttonStyle(selection == option ? .dsPrimary : .dsSecondary)
-                .accessibilityAddTraits(selection == option ? .isSelected : [])
+                Text(verbatim: label(option)).tag(option)
             }
+        } label: {
+            Text(verbatim: title)
         }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .controlSize(.regular)
+        .frame(minHeight: DS.ControlHeight.regular)
+        .fixedSize(horizontal: true, vertical: false)
     }
 }
 
