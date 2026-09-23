@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 清理一项后自动重建预览，剩余项目无需手动刷新即可继续显示；清理页统计和筛选栏也改为紧凑布局。
+- Cleanup rebuilds its preview after each removal so remaining items stay visible without a manual refresh; counts and filters use a compact layout.
 - 概览的“我可以管理哪些工具？”改为紧凑的平面统计入口，点击后继续按对应条件筛选工具。
 - Overview's tool management counts now use compact, flat links that retain their matching Tools filters.
 - 重构更新和问题页面：统一页首信息层级，更新列表按安装来源展示版本变化，问题列表按需展开说明与操作，并适配窄窗口。

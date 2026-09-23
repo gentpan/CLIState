@@ -187,8 +187,10 @@ final class AppModel {
         guard !isScanning else { return nil }
         scanState = .scanning(.deep)
         let result = await actions.runBackgroundCheck(preferences: preferences, allowAutomaticInstalls: allowAutomaticInstalls)
+        if let updated = result?.snapshot {
+            snapshot = route == .cleanup ? (await actions.refreshCleanupCandidates() ?? updated) : updated
+        }
         scanState = .idle
-        if let updated = result?.snapshot { snapshot = updated }
         if let loaded = try? await actions.loadHistory() { history = loaded }
         return result
     }
@@ -210,7 +212,10 @@ final class AppModel {
         guard !isScanning, !isRefreshingMetadata else { return }
         scanState = .scanning(depth)
         do {
-            snapshot = try await work()
+            let updated = try await work()
+            // Provider cleanup previews are loaded on demand. A normal scan omits
+            // them, so rebuild the preview before publishing a Cleanup-page scan.
+            snapshot = route == .cleanup ? (await actions.refreshCleanupCandidates() ?? updated) : updated
             migrateToolPolicies()
             scanState = .idle
         } catch {

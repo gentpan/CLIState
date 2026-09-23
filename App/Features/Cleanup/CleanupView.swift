@@ -20,8 +20,7 @@ struct CleanupView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            header.fixedSize(horizontal: false, vertical: true)
-            Divider()
+            header
             if candidates.isEmpty && isPreviewing {
                 ProgressView("Previewing cleanup…").frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if visible.isEmpty {
@@ -60,30 +59,33 @@ struct CleanupView: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: DS.Space.s4) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: DS.Space.s1) {
-                    Text("Cleanup preview").font(DS.Font.title)
-                    Text("Review what can be removed before making changes.")
-                        .font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary)
+        VStack(spacing: 0) {
+            DSWorklistHeader(Text("Cleanup preview"), symbol: Symbol.cleanup) {
+                Text("Review what can be removed before making changes.")
+            } actions: {
+                HStack(spacing: DS.Space.s2) {
+                    if isPreviewing { ProgressView().controlSize(.small) }
+                    Button("Refresh preview") { Task { await refresh() } }.disabled(busy)
                 }
-                Spacer()
-                if isPreviewing { ProgressView().controlSize(.small) }
-                Button("Refresh preview") { Task { await refresh() } }.disabled(busy)
             }
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: DS.Layout.statColumnMin), spacing: DS.Space.s6)], alignment: .leading, spacing: DS.Space.s3) {
-                metric(String(localized: "Measured reclaimable space"), value: measuredSpace)
-                metric(String(localized: "Ready to clean"), value: String(actionable.count))
-                metric(String(localized: "Suggestion only"), value: String(candidates.count - actionable.count))
+            VStack(alignment: .leading, spacing: DS.Space.s3) {
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: DS.Space.s6) { metrics }.fixedSize(horizontal: true, vertical: false)
+                    VStack(alignment: .leading, spacing: DS.Space.s1) { metrics }
+                }
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: DS.Space.s4) { tabs; search }
+                    VStack(alignment: .leading, spacing: DS.Space.s2) { tabs; search }
+                }
             }
-
-            ViewThatFits(in: .horizontal) {
-                HStack(spacing: DS.Space.s4) { tabs; search }
-                VStack(alignment: .leading, spacing: DS.Space.s2) { tabs; search }
+            .padding(.horizontal, DS.Space.s4)
+            .padding(.vertical, DS.Space.s3)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(DS.Palette.background)
+            .overlay(alignment: .bottom) {
+                Rectangle().fill(DS.Palette.border).frame(height: DS.Stroke.hairline)
             }
         }
-        .padding(DS.Space.s6)
-        .background(DS.Palette.panelPrimary)
     }
 
     private var measuredSpace: String {
@@ -91,21 +93,29 @@ struct CleanupView: View {
         return values.isEmpty ? String(localized: "Not measured") : values.reduce(0, +).formatted(.byteCount(style: .file))
     }
 
+    @ViewBuilder
+    private var metrics: some View {
+        metric(String(localized: "Measured reclaimable space"), value: measuredSpace)
+        metric(String(localized: "Ready to clean"), value: String(actionable.count))
+        metric(String(localized: "Suggestion only"), value: String(candidates.count - actionable.count))
+    }
+
     private func metric(_ title: String, value: String) -> some View {
-        VStack(alignment: .leading, spacing: DS.Space.s1) {
+        HStack(spacing: DS.Space.s1) {
             Text(title).font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary)
-            Text(value).font(DS.Font.largeTitle).monospacedDigit()
-        }.frame(maxWidth: .infinity, alignment: .leading)
+            Text(value).font(DS.Font.captionEmphasis).monospacedDigit()
+                .foregroundStyle(DS.Palette.textPrimary)
+        }
+        .accessibilityElement(children: .combine)
     }
 
     private var tabs: some View {
         DSTabs(selection: $filter, options: CleanupFilter.allCases, title: String(localized: "Cleanup filter")) { $0.title }
-            .frame(maxWidth: DS.Layout.tabsMaxWidth)
     }
 
     private var search: some View {
         TextField("Search cleanup items or paths", text: $query).textFieldStyle(.dsField)
-            .frame(minWidth: DS.Layout.nameColumnMin)
+            .frame(minWidth: DS.Layout.nameColumnMin, maxWidth: DS.Layout.inspectorIdeal)
     }
 
     private func refresh() async {
