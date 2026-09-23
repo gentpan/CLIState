@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 问题详情现在说明不能自动处理的具体原因，并给出对应步骤。对 root 所有的 Docker 残留链接，可在访达中一次选中全部 8 项；macOS 系统链接不会进入手动清理列表。
+- Issue details now explain why an automatic fix is unavailable and what to do next. Finder can select all eight root-owned Docker leftovers at once, while macOS-managed links stay out of manual cleanup.
 - 问题总数直接显示在窗口标题后；精简页首操作区，并让严重程度分组承载状态图标，列表行聚焦问题名称、路径和处理说明。
 - The issue total now follows the window title. A slimmer action bar and severity group headings keep each issue row focused on its name, path, and handling details.
 - 更新页将待更新总量与检查时间合并为简洁摘要；来源标题只显示名称和数量，来源检查时间明显不同时才单独提示。列表改为灰色分组卡片，保留单项、批量及跳过操作。

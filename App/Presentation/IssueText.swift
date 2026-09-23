@@ -1,4 +1,5 @@
 import CLIStateDomain
+import Foundation
 import SwiftUI
 
 struct IssueText: Hashable {
@@ -72,9 +73,15 @@ extension HealthIssue {
             let link = (subject as NSString).lastPathComponent
             let home = snapshot?.shell.variables["HOME"] ?? NSHomeDirectory()
             let destination = paths.dropFirst().first.map { PathRedaction.abbreviatingHome($0, home: home) } ?? "?"
+            if severity == .info {
+                return IssueText(
+                    title: String(localized: "Broken link: \(link)"),
+                    message: String(localized: "This macOS-managed link points to \(destination), which is currently unavailable. Do not remove the system link manually.")
+                )
+            }
             return IssueText(
                 title: String(localized: "Broken link: \(link)"),
-                message: String(localized: "It points to \(destination), which no longer exists. This usually happens after an app or package is uninstalled. It's safe to move the link to the Trash.")
+                message: String(localized: "It points to \(destination), which no longer exists. This can happen after its app is removed. Check the resolution below before changing the link.")
             )
 
         case .brokenActiveExecutable:
@@ -170,6 +177,94 @@ extension HealthIssue {
             String(localized: "Review project compatibility before upgrading to a supported runtime. An available update may not resolve end-of-life status.")
         case .shellShadowing:
             String(localized: "Review the alias or function in your shell configuration. Keep it if intentional, or remove it there to run the executable from PATH.")
+        }
+    }
+}
+
+struct IssueResolution {
+    let status: String?
+    let symbol: String
+    let tint: Color
+    let reason: String
+    let nextStep: String
+}
+
+extension HealthIssue {
+    /// Explain the boundary between a safe App action and a user decision.
+    func resolution(cleanupCandidate: CleanupCandidate?) -> IssueResolution {
+        switch type {
+        case .brokenSymlink, .brokenActiveExecutable:
+            if cleanupCandidate != nil {
+                return IssueResolution(
+                    status: String(localized: "Ready to handle"), symbol: Symbol.good, tint: DS.Palette.success,
+                    reason: String(localized: "CLI State confirmed this broken link can be moved to the Trash. It will check the link again and ask for confirmation first."),
+                    nextStep: String(localized: "If you still need the original app, reinstall it instead of removing the link.")
+                )
+            }
+            if type == .brokenActiveExecutable {
+                return IssueResolution(
+                    status: String(localized: "Needs repair"), symbol: Symbol.tools, tint: DS.Palette.warning,
+                    reason: String(localized: "CLI State cannot confirm that this unavailable executable is a standalone broken link safe to remove."),
+                    nextStep: String(localized: "Open the tool details and repair or reinstall it with the manager that owns this installation.")
+                )
+            }
+            if type == .brokenSymlink, severity == .info {
+                return IssueResolution(
+                    status: String(localized: "System managed"), symbol: Symbol.systemManaged, tint: DS.Palette.textSecondary,
+                    reason: String(localized: "This link is in a macOS-managed location. CLI State cannot remove it, and manual deletion is not recommended."),
+                    nextStep: String(localized: "Leave the link in place; a macOS update or the component installer can repair it.")
+                )
+            }
+            if let path = paths.first {
+                let parent = (path as NSString).deletingLastPathComponent
+                if !FileManager.default.isWritableFile(atPath: parent) {
+                    return IssueResolution(
+                        status: String(localized: "Administrator required"), symbol: Symbol.systemManaged, tint: DS.Palette.warning,
+                        reason: String(localized: "Your account cannot write to \(parent), so CLI State cannot move this link to the Trash automatically."),
+                        nextStep: String(localized: "If you need the original app, reinstall it. Otherwise, reveal the exact link in Finder and move it to the Trash with administrator authorization.")
+                    )
+                }
+            }
+            return IssueResolution(
+                status: String(localized: "Recheck needed"), symbol: Symbol.refresh, tint: DS.Palette.textSecondary,
+                reason: String(localized: "This link no longer matches an actionable cleanup candidate. It may have changed since the last scan."),
+                nextStep: String(localized: "Check again before changing or removing it.")
+            )
+
+        case .missingPathEntry where severity == .info:
+            return IssueResolution(
+                status: String(localized: "System managed"), symbol: Symbol.systemManaged, tint: DS.Palette.textSecondary,
+                reason: String(localized: "macOS can add this directory only while its component is mounted. Its absence does not require cleanup."),
+                nextStep: String(localized: "Leave this system PATH entry unchanged.")
+            )
+
+        case .missingPathEntry, .duplicatePathEntry, .relativePathEntry, .shellShadowing:
+            return IssueResolution(
+                status: nil, symbol: Symbol.config, tint: DS.Palette.textSecondary,
+                reason: String(localized: "PATH and shell aliases can come from several startup files or apps. CLI State cannot identify the exact source safely enough to edit it for you."),
+                nextStep: handlingAdvice
+            )
+
+        case .pathConflict, .duplicateInstallation:
+            return IssueResolution(
+                status: nil, symbol: Symbol.tools, tint: DS.Palette.textSecondary,
+                reason: String(localized: "Several installations may be intentional or needed by other projects. Removing one automatically could break those projects."),
+                nextStep: handlingAdvice
+            )
+
+        case .runtimeEndOfLife where details["systemManaged"] == "true":
+            return IssueResolution(
+                status: String(localized: "System managed"), symbol: Symbol.systemManaged, tint: DS.Palette.textSecondary,
+                reason: String(localized: "This runtime comes with macOS and cannot be upgraded or removed separately by CLI State."),
+                nextStep: String(localized: "Install a supported runtime beside the system copy, then choose it for your projects through PATH or the project's version manager.")
+            )
+
+        default:
+            return IssueResolution(
+                status: nil, symbol: Symbol.info, tint: DS.Palette.textSecondary,
+                reason: String(localized: "This issue needs a decision about your tools or environment before any change can be made safely."),
+                nextStep: handlingAdvice
+            )
         }
     }
 }

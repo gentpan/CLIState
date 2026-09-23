@@ -8287,6 +8287,325 @@
         }
       }
     },
+    "It points to %@, which no longer exists. This can happen after its app is removed. Check the resolution below before changing the link." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "它指向的 %@ 已不存在，可能是所属应用被移除后留下的。更改链接前，请先查看下方处理方案。"
+          }
+        }
+      }
+    },
+    "Ready to handle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可直接处理"
+          }
+        }
+      }
+    },
+    "CLI State confirmed this broken link can be moved to the Trash. It will check the link again and ask for confirmation first." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLI State 已确认可以把这个失效链接移到废纸篓。操作前会重新检查链接并请你确认。"
+          }
+        }
+      }
+    },
+    "If you still need the original app, reinstall it instead of removing the link." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果仍需使用原应用，请重新安装应用，而不是移除链接。"
+          }
+        }
+      }
+    },
+    "System managed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "系统管理"
+          }
+        }
+      }
+    },
+    "This link is in a macOS-managed location. CLI State cannot remove it, and manual deletion is not recommended." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此链接位于 macOS 管理的位置，CLI State 无法移除，也不建议手动删除。"
+          }
+        }
+      }
+    },
+    "Leave the link in place; a macOS update or the component installer can repair it." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保留此链接；macOS 更新或该组件的安装程序可能修复它。"
+          }
+        }
+      }
+    },
+    "Administrator required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要管理员授权"
+          }
+        }
+      }
+    },
+    "Your account cannot write to %@, so CLI State cannot move this link to the Trash automatically." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前账户不能写入 %@，因此 CLI State 无法自动将此链接移到废纸篓。"
+          }
+        }
+      }
+    },
+    "If you need the original app, reinstall it. Otherwise, reveal the exact link in Finder and move it to the Trash with administrator authorization." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果仍需原应用，请重新安装。否则，在访达中定位这个确切的链接，经管理员授权后移到废纸篓。"
+          }
+        }
+      }
+    },
+    "Recheck needed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要重新检测"
+          }
+        }
+      }
+    },
+    "This link no longer matches an actionable cleanup candidate. It may have changed since the last scan." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此链接已不符合可处理的清理条件，可能在上次扫描后发生了变化。"
+          }
+        }
+      }
+    },
+    "Check again before changing or removing it." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更改或移除前，请先重新检测。"
+          }
+        }
+      }
+    },
+    "macOS can add this directory only while its component is mounted. Its absence does not require cleanup." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS 只会在对应组件挂载时加入这个目录；目录暂时不存在，无需清理。"
+          }
+        }
+      }
+    },
+    "Leave this system PATH entry unchanged." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保留此系统 PATH 条目，不需要修改。"
+          }
+        }
+      }
+    },
+    "PATH and shell aliases can come from several startup files or apps. CLI State cannot identify the exact source safely enough to edit it for you." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PATH 和 Shell 别名可能来自多个启动配置文件或应用。CLI State 无法可靠判断具体来源，因此不能代你修改。"
+          }
+        }
+      }
+    },
+    "Several installations may be intentional or needed by other projects. Removing one automatically could break those projects." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多份安装可能是有意保留的，也可能被其他项目依赖。自动移除其中一份可能导致项目无法运行。"
+          }
+        }
+      }
+    },
+    "This runtime comes with macOS and cannot be upgraded or removed separately by CLI State." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此运行环境随 macOS 提供，CLI State 无法单独升级或移除它。"
+          }
+        }
+      }
+    },
+    "Install a supported runtime beside the system copy, then choose it for your projects through PATH or the project's version manager." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "并行安装受支持的版本，再通过 PATH 或项目的版本管理器选用它；保留系统副本。"
+          }
+        }
+      }
+    },
+    "This issue needs a decision about your tools or environment before any change can be made safely." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安全修改前，需要先确认你对工具或环境的使用方式。"
+          }
+        }
+      }
+    },
+    "Resolution" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "处理方案"
+          }
+        }
+      }
+    },
+    "CLI State cannot move these links because your account cannot write to %@. Finder may ask for administrator authorization." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前账户不能写入 %@，CLI State 因此无法移动这些链接。使用访达处理时，macOS 可能要求管理员授权。"
+          }
+        }
+      }
+    },
+    "Select all links in Finder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在访达中选中全部链接"
+          }
+        }
+      }
+    },
+    "Needs repair" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要修复"
+          }
+        }
+      }
+    },
+    "CLI State cannot confirm that this unavailable executable is a standalone broken link safe to remove." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLI State 无法确认这个不可用的可执行文件是否为可安全移除的独立失效链接。"
+          }
+        }
+      }
+    },
+    "Open the tool details and repair or reinstall it with the manager that owns this installation." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开工具详情，使用管理这份安装的工具修复或重新安装。"
+          }
+        }
+      }
+    },
+    "These links point to the removed %@ app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这些链接都指向已移除的 %@ 应用。"
+          }
+        }
+      }
+    },
+    "If you still need the original app, reinstall it. Otherwise, move only the broken links to the Trash in Finder, authorizing the change if macOS asks." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果仍需原应用，请重新安装；否则只在访达中将这些失效链接移到废纸篓，并在 macOS 提示时授权。"
+          }
+        }
+      }
+    },
+    "This macOS-managed link points to %@, which is currently unavailable. Do not remove the system link manually." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这个由 macOS 管理的链接指向 %@，其目标当前不可用。不要手动移除该系统链接。"
+          }
+        }
+      }
+    },
     "≥ %@" : {
       "extractionState" : "manual",
       "localizations" : {
