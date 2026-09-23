@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 问题页将警告和建议改为轻量分组标题与灰色卡片列表；页首明确显示问题总数，并隐藏为零的批量清理提示。
+- Issues now use compact severity headings and gray grouped cards. The page header shows the issue total and omits an empty batch-cleanup count.
 - Homebrew 卸载前检查已安装的依赖项；如果其他软件仍依赖目标软件包，确认窗口列出依赖并阻止执行。活动面板切换记录时重置输出位置，空输出显示明确提示。
 - Homebrew uninstall now lists installed dependents and blocks an operation that would fail. Switching activity runs resets the output view, with a clear message when no output was captured.
 - 修复设置“关于”页的内容越界裁切；版本、联系链接、App 更新与诊断信息改为适配窗口宽度的分组布局。

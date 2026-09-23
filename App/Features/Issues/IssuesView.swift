@@ -16,29 +16,23 @@ struct IssuesView: View {
             if issues.isEmpty {
                 EmptyStateView("No issues found", symbol: Symbol.good, message: String(localized: "Every command in PATH resolves the way CLI State expects."))
             } else {
-                List {
-                    ForEach([HealthSeverity.critical, .warning, .info], id: \.self) { severity in
-                        let group = issues.filter { $0.severity == severity }
-                        if !group.isEmpty {
-                            Section {
-                                ForEach(group) { issue in
-                                    IssueRow(issue: issue, isExpanded: expansionBinding(issue.id, defaultExpanded: issues.count <= Self.expandAllLimit))
-                                }
-                            } header: {
-                                IconText(symbol: severity.symbol, text: String(localized: "\(severity.sectionTitle) (\(group.count))"), tint: severity.tint, textColor: DS.Palette.textPrimary, font: DS.Font.captionEmphasis)
-                                    .padding(.top, DS.Space.s2)
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: DS.Space.s6) {
+                        ForEach([HealthSeverity.critical, .warning, .info], id: \.self) { severity in
+                            let group = issues.filter { $0.severity == severity }
+                            if !group.isEmpty {
+                                issueGroup(group, severity: severity, defaultExpanded: issues.count <= Self.expandAllLimit)
                             }
                         }
                     }
+                    .padding(DS.Space.s4)
                 }
-                .listStyle(.inset)
-                .alternatingRowBackgrounds(.disabled)
-                .dsScrollBackground()
+                .background(DS.Palette.background)
             }
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            DSWorklistHeader(Text("\(issues.count) found"), symbol: Symbol.issues) {
-                if !issues.isEmpty {
+            DSWorklistHeader(Text("\(issues.count) issues"), symbol: Symbol.issues) {
+                if !eligible.isEmpty {
                     Text("\(eligible.count) issues eligible for batch cleanup")
                 }
             } actions: {
@@ -58,6 +52,43 @@ struct IssuesView: View {
 
     /// A short list is easier to read fully expanded.
     private static let expandAllLimit = 3
+
+    private func issueGroup(_ issues: [HealthIssue], severity: HealthSeverity, defaultExpanded: Bool) -> some View {
+        VStack(alignment: .leading, spacing: DS.Space.s2) {
+            HStack(spacing: DS.Space.s2) {
+                Image(systemName: severity.symbol)
+                    .font(DS.Font.inlineIcon)
+                    .foregroundStyle(severity.tint)
+                    .frame(width: DS.IconSize.inline)
+                    .accessibilityHidden(true)
+                Text(severity.sectionTitle)
+                    .font(DS.Font.bodyEmphasis)
+                    .foregroundStyle(DS.Palette.textPrimary)
+                Text(issues.count, format: .number)
+                    .font(DS.Font.caption)
+                    .foregroundStyle(DS.Palette.textSecondary)
+            }
+            .padding(.horizontal, DS.Space.s4)
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
+
+            LazyVStack(spacing: 0) {
+                ForEach(Array(issues.enumerated()), id: \.element.id) { index, issue in
+                    if index > 0 {
+                        Rectangle()
+                            .fill(DS.Palette.border)
+                            .frame(height: DS.Stroke.hairline)
+                            .padding(.leading, DS.Space.s4 + DS.IconSize.inline + DS.Space.s2)
+                    }
+                    IssueRow(issue: issue, isExpanded: expansionBinding(issue.id, defaultExpanded: defaultExpanded))
+                        .padding(.horizontal, DS.Space.s4)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(DS.Palette.panelPrimary, in: RoundedRectangle(cornerRadius: DS.Radius.base))
+            .overlay(RoundedRectangle(cornerRadius: DS.Radius.base).strokeBorder(DS.Palette.border, lineWidth: DS.Stroke.hairline))
+        }
+    }
 
     @ViewBuilder
     private func headerActionButtons(issues: [HealthIssue], eligible: [HealthIssue], needsManualHandling: Bool) -> some View {
