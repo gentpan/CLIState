@@ -77,20 +77,37 @@ struct ToolFilterBar: View {
     // MARK: Categories
 
     private var categoryTabs: some View {
-        Picker(selection: Binding(get: { filter.category }, set: { value in update { $0.category = value } })) {
-            Text(verbatim: "\(String(localized: "All")) \(count(category: nil))")
-                .tag(ToolCategory?.none)
+        HStack(spacing: DS.Space.s1) {
+            categoryTab(String(localized: "All"), count: count(category: nil), category: nil)
             ForEach(categories, id: \.self) { category in
-                Text(verbatim: "\(category.pluralTitle) \(count(category: category))")
-                    .tag(ToolCategory?.some(category))
+                categoryTab(category.pluralTitle, count: count(category: category), category: category)
             }
-        } label: {
-            Text("Category")
         }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-        .frame(minHeight: DS.ControlHeight.small)
         .fixedSize(horizontal: true, vertical: false)
+    }
+
+    private func categoryTab(_ title: String, count: Int, category: ToolCategory?) -> some View {
+        let selected = filter.category == category
+        return Button {
+            update { $0.category = category }
+        } label: {
+            HStack(spacing: DS.Space.s1) {
+                Text(title)
+                    .font(selected ? DS.Font.bodyEmphasis : DS.Font.body)
+                    .foregroundStyle(selected ? DS.Palette.textPrimary : DS.Palette.textSecondary)
+                Text(count, format: .number)
+                    .font(DS.Font.caption)
+                    .monospacedDigit()
+                    .foregroundStyle(DS.Palette.textTertiary)
+            }
+            .padding(.horizontal, DS.Space.s2)
+            .frame(height: DS.ControlHeight.small)
+            .background(selected ? DS.Palette.panelSecondary : Color.clear, in: RoundedRectangle(cornerRadius: DS.Radius.base))
+            .contentShape(RoundedRectangle(cornerRadius: DS.Radius.base))
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(verbatim: "\(title), \(count)"))
+        .accessibilityAddTraits(selected ? .isSelected : [])
     }
 
     private var categoryMenu: some View {
