@@ -28,28 +28,58 @@ struct OverviewCharts: View {
 
     private var accessCard: some View {
         VStack(alignment: .leading, spacing: DS.Space.s3) {
-            SectionHeader("What can I manage?", symbol: "slider.horizontal.3")
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: DS.Space.s3), count: width >= 4 * DS.Layout.statColumnMin ? 4 : 2), spacing: DS.Space.s3) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: DS.Space.s3), count: width >= 4 * DS.Layout.statColumnMin + 3 * DS.Space.s3 ? 4 : 2), spacing: DS.Space.s3) {
                 ForEach([ToolFilter.Status.removable, .direct, .officialInstaller, .systemManaged], id: \.self) { status in
                     let filter = ToolFilter(status: status)
-                    Button {
+                    AccessMetric(status: status, count: tools.count(where: filter.matches)) {
                         model.searchText = ""
                         model.route = .tools(filter)
-                    } label: {
-                        VStack(alignment: .leading, spacing: DS.Space.s1) {
-                            Text(status.title).font(DS.Font.body)
-                            Text(tools.count(where: filter.matches), format: .number).font(DS.Font.title)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }
+            Divider()
             Text("Counts are tools and may overlap when a tool has multiple installations. Official installer describes the installation source, not a security certification.")
                 .font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary)
             Text("macOS copies are maintained through system updates. A Homebrew copy of the same tool is a separate installation with its own update and uninstall actions.")
                 .font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary)
         }
         .dsCard()
+    }
+}
+
+private struct AccessMetric: View {
+    let status: ToolFilter.Status
+    let count: Int
+    let action: () -> Void
+    @State private var isHovered = false
+
+    var body: some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: DS.Space.s2) {
+                HStack(spacing: DS.Space.s2) {
+                    Text(status.title)
+                        .font(DS.Font.body)
+                        .foregroundStyle(DS.Palette.textSecondary)
+                        .lineLimit(2)
+                    Spacer(minLength: DS.Space.s1)
+                    Image(systemName: "chevron.right")
+                        .font(DS.Font.caption)
+                        .foregroundStyle(DS.Palette.textTertiary)
+                        .accessibilityHidden(true)
+                }
+                Text(count, format: .number)
+                    .font(DS.Font.title)
+                    .monospacedDigit()
+                    .foregroundStyle(DS.Palette.textPrimary)
+            }
+            .frame(maxWidth: .infinity, minHeight: DS.Space.s16, alignment: .leading)
+            .padding(DS.Space.s2)
+            .contentShape(RoundedRectangle(cornerRadius: DS.Radius.base))
+            .background(isHovered ? DS.Palette.panelSecondary : .clear, in: RoundedRectangle(cornerRadius: DS.Radius.base))
+        }
+        .buttonStyle(.plain)
+        .onHover { isHovered = $0 }
+        .accessibilityElement(children: .combine)
     }
 }
 
