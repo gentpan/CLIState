@@ -31,23 +31,27 @@ struct IssuesView: View {
             }
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            DSWorklistHeader(Text("\(issues.count) issues"), symbol: Symbol.issues) {
-                if !eligible.isEmpty {
-                    Text("\(eligible.count) issues eligible for batch cleanup")
-                }
-            } actions: {
+            HStack {
+                Spacer(minLength: 0)
                 ViewThatFits(in: .horizontal) {
                     HStack(spacing: DS.Space.s2) { headerActionButtons(issues: issues, eligible: eligible, needsManualHandling: needsManualHandling) }
                         .fixedSize(horizontal: true, vertical: false)
-                    VStack(alignment: .leading, spacing: DS.Space.s2) { headerActionButtons(issues: issues, eligible: eligible, needsManualHandling: needsManualHandling) }
+                    VStack(alignment: .trailing, spacing: DS.Space.s2) { headerActionButtons(issues: issues, eligible: eligible, needsManualHandling: needsManualHandling) }
                 }
+            }
+            .padding(.horizontal, DS.Space.s4)
+            .padding(.vertical, DS.Space.s3)
+            .frame(minHeight: DS.Layout.pageHeaderMinHeight)
+            .background(DS.Palette.background)
+            .overlay(alignment: .bottom) {
+                Rectangle().fill(DS.Palette.border).frame(height: DS.Stroke.hairline)
             }
             .disabled(model.isScanning || model.isPreparingOperation || model.isOperationRunning || model.isRefreshingMetadata)
         }
         .sheet(isPresented: $showsManualHandling) {
             ManualLinkHandling(paths: issues.filter { $0.type == .brokenSymlink && model.cleanupCandidate(for: $0) == nil }.compactMap { $0.paths.first })
         }
-        .dsPageTitle(Text("Issues"), symbol: Symbol.issues)
+        .dsPageTitle(Text("Issues"), symbol: Symbol.issues, count: issues.count)
     }
 
     /// A short list is easier to read fully expanded.
@@ -78,7 +82,7 @@ struct IssuesView: View {
                         Rectangle()
                             .fill(DS.Palette.border)
                             .frame(height: DS.Stroke.hairline)
-                            .padding(.leading, DS.Space.s4 + DS.IconSize.inline + DS.Space.s2)
+                            .padding(.leading, DS.Space.s4)
                     }
                     IssueRow(issue: issue, isExpanded: expansionBinding(issue.id, defaultExpanded: defaultExpanded))
                         .padding(.horizontal, DS.Space.s4)
@@ -92,13 +96,18 @@ struct IssuesView: View {
 
     @ViewBuilder
     private func headerActionButtons(issues: [HealthIssue], eligible: [HealthIssue], needsManualHandling: Bool) -> some View {
-        Button("Check again") { Task { await model.checkForUpdates() } }
+        Button { Task { await model.checkForUpdates() } } label: {
+            Label("Recheck issues", systemImage: Symbol.refresh)
+        }
+        .buttonStyle(.dsSecondary)
         if !eligible.isEmpty {
             Button("Handle eligible issues…") { model.requestIssueCleanup(issues) }
+                .buttonStyle(.dsPrimary)
                 .help(Text("Batch handling only removes confirmed broken links. Review the suggestions below for configuration and installation conflicts."))
         }
         if needsManualHandling {
             Button("Review manual handling…") { showsManualHandling = true }
+                .buttonStyle(.dsSecondary)
         }
     }
 
@@ -151,7 +160,6 @@ private struct IssueRow: View {
                     actions
                         .disabled(model.isScanning || model.isPreparingOperation || model.isOperationRunning || model.isRefreshingMetadata)
                 }
-                .padding(.leading, DS.IconSize.inline + DS.Space.s2)
             }
         }
         .sheet(isPresented: $showsManualHandling) { ManualLinkHandling(paths: Array(issue.paths.prefix(1))) }
@@ -170,11 +178,6 @@ private struct IssueRow: View {
     /// Keep the title readable even when the first path is long.
     private func summaryLine(_ text: IssueText) -> some View {
         HStack(spacing: DS.Space.s2) {
-            Image(systemName: issue.severity.symbol)
-                .font(DS.Font.inlineIcon)
-                .foregroundStyle(issue.severity.tint)
-                .frame(width: DS.IconSize.inline, height: DS.IconSize.inline)
-                .accessibilityLabel(Text(issue.severity.title))
             VStack(alignment: .leading, spacing: DS.Space.s1) {
                 Text(text.title)
                     .font(DS.Font.bodyEmphasis)

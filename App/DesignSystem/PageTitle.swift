@@ -4,6 +4,7 @@ import SwiftUI
 private struct DSPageTitle: ViewModifier {
     let title: Text
     let symbol: String
+    let count: Int?
 
     func body(content: Content) -> some View {
         content
@@ -31,6 +32,11 @@ private struct DSPageTitle: ViewModifier {
                 title.font(DS.Font.title)
                     .foregroundStyle(DS.Palette.textPrimary)
                     .accessibilityAddTraits(.isHeader)
+                if let count {
+                    Text(count, format: .number)
+                        .font(DS.Font.title)
+                        .foregroundStyle(DS.Palette.textSecondary)
+                }
             }
             .lineLimit(1)
             .fixedSize()
@@ -39,7 +45,7 @@ private struct DSPageTitle: ViewModifier {
 }
 
 extension View {
-    func dsPageTitle(_ title: Text, symbol: String) -> some View {
-        modifier(DSPageTitle(title: title, symbol: symbol))
+    func dsPageTitle(_ title: Text, symbol: String, count: Int? = nil) -> some View {
+        modifier(DSPageTitle(title: title, symbol: symbol, count: count))
     }
 }

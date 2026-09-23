@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 问题总数直接显示在窗口标题后；精简页首操作区，并让严重程度分组承载状态图标，列表行聚焦问题名称、路径和处理说明。
+- The issue total now follows the window title. A slimmer action bar and severity group headings keep each issue row focused on its name, path, and handling details.
 - 更新页将待更新总量与检查时间合并为简洁摘要；来源标题只显示名称和数量，来源检查时间明显不同时才单独提示。列表改为灰色分组卡片，保留单项、批量及跳过操作。
 - The Updates page now shows one total and check time, compact provider counts, and a provider time only when it differs meaningfully. Grouped gray cards retain individual, batch and skip actions.
 - 内容区、卡片、列表、详情和设置的小操作按钮改为原生 macOS 描边／强调样式；液态玻璃仅用于窗口顶部工具栏。
