@@ -2080,6 +2080,16 @@
         }
       }
     },
+    "Current version: %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前版本：%@"
+          }
+        }
+      }
+    },
     "Dark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3371,6 +3381,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最新版本"
+          }
+        }
+      }
+    },
+    "Latest version: %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最新版本：%@"
           }
         }
       }

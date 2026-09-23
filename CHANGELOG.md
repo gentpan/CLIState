@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 重构更新和问题页面：统一页首信息层级，更新列表按安装来源展示版本变化，问题列表按需展开说明与操作，并适配窄窗口。
+- Refined Updates and Issues with consistent page headers, provider-grouped version changes, on-demand issue details and actions, and narrow-window layouts.
 - 将概览、发现、历史、清理、环境迁移、设置及工具详情的切换项统一为原生 macOS 分段控件，并将玻璃操作按钮调整为标准尺寸。
 - Native macOS segmented controls now unify in-page choices across the app; glass action buttons use the standard control size.
 - 工具页分类改为紧凑的原生分段选择控件，缩小筛选按钮，窄窗口自动切换为分类菜单。

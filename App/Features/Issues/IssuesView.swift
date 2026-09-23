@@ -10,6 +10,8 @@ struct IssuesView: View {
 
     var body: some View {
         let issues = model.issues
+        let eligible = issues.filter { model.cleanupCandidate(for: $0) != nil }
+        let needsManualHandling = issues.contains { $0.type == .brokenSymlink && model.cleanupCandidate(for: $0) == nil }
         Group {
             if issues.isEmpty {
                 EmptyStateView("No issues found", symbol: Symbol.good, message: String(localized: "Every command in PATH resolves the way CLI State expects."))
@@ -35,28 +37,17 @@ struct IssuesView: View {
             }
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            VStack(alignment: .leading, spacing: DS.Space.s2) {
-                HStack {
-                    Text("\(issues.count) found").font(DS.Font.headline)
-                    Spacer()
-                    Button("Check again") { Task { await model.checkForUpdates() } }
-                    Button("Handle eligible issues…") {
-                        model.requestIssueCleanup(issues)
-                    }
-                    .disabled(!issues.contains { model.cleanupCandidate(for: $0) != nil })
+            DSWorklistHeader(Text("\(issues.count) found"), symbol: Symbol.issues) {
+                if !issues.isEmpty {
+                    Text("\(eligible.count) issues eligible for batch cleanup")
                 }
-                if issues.contains(where: { $0.type == .brokenSymlink && model.cleanupCandidate(for: $0) == nil }) {
-                    Button("Review manual handling…") { showsManualHandling = true }
-                        .buttonStyle(.dsSecondary)
+            } actions: {
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: DS.Space.s2) { headerActionButtons(issues: issues, eligible: eligible, needsManualHandling: needsManualHandling) }
+                        .fixedSize(horizontal: true, vertical: false)
+                    VStack(alignment: .leading, spacing: DS.Space.s2) { headerActionButtons(issues: issues, eligible: eligible, needsManualHandling: needsManualHandling) }
                 }
-                Text("\(issues.filter { model.cleanupCandidate(for: $0) != nil }.count) issues eligible for batch cleanup")
-                    .font(DS.Font.captionEmphasis)
-                Text("Batch handling only removes confirmed broken links. Review the suggestions below for configuration and installation conflicts.")
-                    .font(DS.Font.caption)
-                    .foregroundStyle(DS.Palette.textSecondary)
             }
-            .padding(DS.Space.s4)
-            .background(DS.Palette.panelPrimary)
             .disabled(model.isScanning || model.isPreparingOperation || model.isOperationRunning || model.isRefreshingMetadata)
         }
         .sheet(isPresented: $showsManualHandling) {
@@ -67,6 +58,18 @@ struct IssuesView: View {
 
     /// A short list is easier to read fully expanded.
     private static let expandAllLimit = 3
+
+    @ViewBuilder
+    private func headerActionButtons(issues: [HealthIssue], eligible: [HealthIssue], needsManualHandling: Bool) -> some View {
+        Button("Check again") { Task { await model.checkForUpdates() } }
+        if !eligible.isEmpty {
+            Button("Handle eligible issues…") { model.requestIssueCleanup(issues) }
+                .help(Text("Batch handling only removes confirmed broken links. Review the suggestions below for configuration and installation conflicts."))
+        }
+        if needsManualHandling {
+            Button("Review manual handling…") { showsManualHandling = true }
+        }
+    }
 
     private func expansionBinding(_ id: String, defaultExpanded: Bool) -> Binding<Bool> {
         Binding(
@@ -82,6 +85,7 @@ private struct IssueRow: View {
     let issue: HealthIssue
     @Binding var isExpanded: Bool
     @Environment(AppModel.self) private var model
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private let pathLimit = 3
     @State private var showsManualHandling = false
 
@@ -89,7 +93,7 @@ private struct IssueRow: View {
         let text = issue.text(in: model.snapshot)
         VStack(alignment: .leading, spacing: DS.Space.s2) {
             Button {
-                withAnimation(DS.Motion.standard) { isExpanded.toggle() }
+                withAnimation(reduceMotion ? nil : DS.Motion.standard) { isExpanded.toggle() }
             } label: {
                 summaryLine(text)
             }
@@ -109,18 +113,18 @@ private struct IssueRow: View {
                     } else if !issue.paths.isEmpty {
                         paths
                     }
+                    Text(handlingAdvice)
+                        .font(DS.Font.caption)
+                        .foregroundStyle(DS.Palette.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    actions
+                        .disabled(model.isScanning || model.isPreparingOperation || model.isOperationRunning || model.isRefreshingMetadata)
                 }
                 .padding(.leading, DS.IconSize.inline + DS.Space.s2)
             }
-            Text(handlingAdvice)
-                .font(DS.Font.caption)
-                .foregroundStyle(DS.Palette.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-            actions
-                .disabled(model.isScanning || model.isPreparingOperation || model.isOperationRunning || model.isRefreshingMetadata)
         }
         .sheet(isPresented: $showsManualHandling) { ManualLinkHandling(paths: Array(issue.paths.prefix(1))) }
-        .padding(.vertical, DS.Space.s3)
+        .padding(.vertical, DS.Space.s2)
         .accessibilityElement(children: .contain)
     }
 
@@ -132,7 +136,7 @@ private struct IssueRow: View {
         return issue.handlingAdvice
     }
 
-    /// Icon, title and the first path on one line.
+    /// Keep the title readable even when the first path is long.
     private func summaryLine(_ text: IssueText) -> some View {
         HStack(spacing: DS.Space.s2) {
             Image(systemName: issue.severity.symbol)
@@ -140,13 +144,15 @@ private struct IssueRow: View {
                 .foregroundStyle(issue.severity.tint)
                 .frame(width: DS.IconSize.inline, height: DS.IconSize.inline)
                 .accessibilityLabel(Text(issue.severity.title))
-            Text(text.title)
-                .font(DS.Font.bodyEmphasis)
-                .foregroundStyle(DS.Palette.textPrimary)
-                .lineLimit(2)
-            if let path = issue.paths.first {
-                PathText(path: path, color: DS.Palette.textSecondary)
-                    .lineLimit(1)
+            VStack(alignment: .leading, spacing: DS.Space.s1) {
+                Text(text.title)
+                    .font(DS.Font.bodyEmphasis)
+                    .foregroundStyle(DS.Palette.textPrimary)
+                    .lineLimit(2)
+                if let path = issue.paths.first {
+                    PathText(path: path, color: DS.Palette.textSecondary)
+                        .lineLimit(1)
+                }
             }
             Spacer(minLength: DS.Space.s2)
             Image(systemName: isExpanded ? Symbol.chevronDown : Symbol.chevronRight)
@@ -184,40 +190,47 @@ private struct IssueRow: View {
 
     @ViewBuilder
     private var actions: some View {
-        HStack(spacing: DS.Space.s2) {
-            if model.cleanupCandidate(for: issue) != nil {
-                Button("Handle this issue…") { model.requestIssueCleanup([issue]) }
-            }
-            if issue.type == .providerScanFailed {
-                Button("Retry scan") { Task { await model.checkForUpdates() } }
-            }
-            if let action = issue.suggestedAction, let title = action.title, canPerform(action) {
-                Button {
-                    perform(action)
-                } label: {
-                    Label(title, systemImage: action.symbol)
-                }
-            }
-            if issue.type == .brokenSymlink, model.cleanupCandidate(for: issue) == nil {
-                Button("How to handle…") { showsManualHandling = true }.buttonStyle(.dsSecondary)
-            }
-            if issue.type == .brokenSymlink, model.cleanupCandidate(for: issue) != nil {
-                Button {
-                    model.route = .cleanup
-                } label: {
-                    Label("Review in Cleanup", systemImage: Symbol.cleanup)
-                }
-            }
-            if let toolID = issue.toolID, issue.suggestedAction != .openTool(toolID) {
-                Button {
-                    model.show(tool: toolID)
-                } label: {
-                    Label("Show Tool", systemImage: Symbol.tools)
-                }
-            }
-            AskAIAboutIssueButton(issue: issue)
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: DS.Space.s2) { actionButtons }
+                .fixedSize(horizontal: true, vertical: false)
+            VStack(alignment: .leading, spacing: DS.Space.s2) { actionButtons }
         }
         .controlSize(.small)
+    }
+
+    @ViewBuilder
+    private var actionButtons: some View {
+        if model.cleanupCandidate(for: issue) != nil {
+            Button("Handle this issue…") { model.requestIssueCleanup([issue]) }
+        }
+        if issue.type == .providerScanFailed {
+            Button("Retry scan") { Task { await model.checkForUpdates() } }
+        }
+        if let action = issue.suggestedAction, let title = action.title, canPerform(action) {
+            Button {
+                perform(action)
+            } label: {
+                Label(title, systemImage: action.symbol)
+            }
+        }
+        if issue.type == .brokenSymlink, model.cleanupCandidate(for: issue) == nil {
+            Button("How to handle…") { showsManualHandling = true }.buttonStyle(.dsSecondary)
+        }
+        if issue.type == .brokenSymlink, model.cleanupCandidate(for: issue) != nil {
+            Button {
+                model.route = .cleanup
+            } label: {
+                Label("Review in Cleanup", systemImage: Symbol.cleanup)
+            }
+        }
+        if let toolID = issue.toolID, issue.suggestedAction != .openTool(toolID) {
+            Button {
+                model.show(tool: toolID)
+            } label: {
+                Label("Show Tool", systemImage: Symbol.tools)
+            }
+        }
+        AskAIAboutIssueButton(issue: issue)
     }
 
     private func canPerform(_ action: SuggestedAction) -> Bool {

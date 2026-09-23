@@ -10,17 +10,13 @@ struct UpdatesView: View {
         let skipped = model.skippedUpdateItems
         Group {
             if items.isEmpty && skipped.isEmpty {
-                EmptyStateView("Everything is on the latest version", symbol: StatusKind.latest.symbol, message: String(localized: "Check again to look for new releases.")) {
-                    Button("Check for Updates") { Task { await model.checkForUpdates() } }
-                        .modifier(DSGlassButton())
-                        .disabled(model.isScanning)
-                }
+                EmptyStateView("Everything is on the latest version", symbol: StatusKind.latest.symbol, message: String(localized: "Check again to look for new releases."))
             } else {
                 List {
                     ForEach(groups(items), id: \.provider) { group in
                         Section {
                             ForEach(group.items) { item in
-                                UpdateRow(item: item, isSkipped: false, wide: contentWidth >= UpdateColumns.minimumWidth)
+                                UpdateRow(item: item, isSkipped: false, wide: contentWidth >= DS.Layout.toolsTableFullWidth)
                             }
                         } header: {
                             providerHeader(group.provider, count: group.items.count)
@@ -29,7 +25,7 @@ struct UpdatesView: View {
                     if !skipped.isEmpty {
                         Section {
                             ForEach(skipped) { item in
-                                UpdateRow(item: item, isSkipped: true, wide: contentWidth >= UpdateColumns.minimumWidth)
+                                UpdateRow(item: item, isSkipped: true, wide: contentWidth >= DS.Layout.toolsTableFullWidth)
                             }
                         } header: {
                             Text("Skipped versions")
@@ -59,15 +55,19 @@ struct UpdatesView: View {
             }
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            VStack(alignment: .leading, spacing: DS.Space.s2) {
-                header(items)
-                if contentWidth >= UpdateColumns.minimumWidth {
-                    UpdateColumns.header
+            VStack(spacing: 0) {
+                DSWorklistHeader(Text("\(items.count) updates"), symbol: Symbol.updates) {
+                    headerMetadata
+                } actions: {
+                    headerActions(items)
                 }
                 if let error = model.metadataRefreshError {
                     Label(error, systemImage: "exclamationmark.triangle")
-                        .font(DS.Font.body).foregroundStyle(DS.Palette.warning)
-                        .padding(.horizontal, DS.Space.s4)
+                        .font(DS.Font.body)
+                        .foregroundStyle(DS.Palette.warning)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(DS.Space.s3)
+                        .background(DS.Palette.panelPrimary)
                 }
             }
             .disabled(model.isRefreshingMetadata)
@@ -75,43 +75,19 @@ struct UpdatesView: View {
         .dsPageTitle(Text("Updates"), symbol: Symbol.updates)
     }
 
-    private func header(_ items: [UpdateItem]) -> some View {
-        VStack(alignment: .leading, spacing: DS.Space.s2) {
-            ViewThatFits(in: .horizontal) {
-                HStack(spacing: DS.Space.s4) { statusBadges; Spacer(); headerActions(items) }
-                VStack(alignment: .leading, spacing: DS.Space.s3) { statusBadges; headerActions(items) }
-            }
-        }
-        .padding(.horizontal, DS.Space.s4)
-        .padding(.vertical, DS.Space.s3)
-        .background(DS.Palette.panelPrimary)
-    }
-
-    private var statusBadges: some View {
+    private var headerMetadata: some View {
         HStack(spacing: DS.Space.s2) {
-            Label("\(model.updateItems.count) updates", systemImage: Symbol.update)
-                .foregroundStyle(DS.Palette.highlight)
-                .padding(.horizontal, DS.Space.s2).padding(.vertical, DS.Space.s1)
-                .background(DS.Palette.primary.opacity(DS.Opacity.tint), in: RoundedRectangle(cornerRadius: DS.Radius.small))
             if let checked = model.snapshot?.latestCheckedAt ?? model.providerSnapshot(.homebrew)?.latestCheckedAt {
                 Label(RelativeTime.text(checked), systemImage: "clock")
-                    .padding(.horizontal, DS.Space.s2).padding(.vertical, DS.Space.s1)
-                    .background(DS.Palette.panelSecondary, in: RoundedRectangle(cornerRadius: DS.Radius.small))
                     .help(Text("Last checked \(RelativeTime.text(checked))"))
             }
             let major = model.updateItems.filter { $0.installation.updateKind == .major }.count
             if major > 0 {
                 Label("\(major) major updates", systemImage: Symbol.needsAttention)
                     .foregroundStyle(DS.Palette.warning)
-                    .padding(.horizontal, DS.Space.s2).padding(.vertical, DS.Space.s1)
-                    .background(DS.Palette.warning.opacity(DS.Opacity.tint), in: RoundedRectangle(cornerRadius: DS.Radius.small))
             }
-            Image(systemName: "info.circle")
-                .help(Text("Updates don't affect environment status. Automatic updates skip major versions unless you allow them."))
         }
-        .font(DS.Font.caption)
-        .foregroundStyle(DS.Palette.textSecondary)
-        .fixedSize()
+        .help(Text("Updates don't affect environment status. Automatic updates skip major versions unless you allow them."))
     }
 
     private func headerActions(_ items: [UpdateItem]) -> some View {
@@ -127,7 +103,6 @@ struct UpdatesView: View {
             .disabled(items.filter { ToolActionsAvailable.canUpdate($0.installation) }.isEmpty)
         }
         .disabled(model.isPreparingOperation || model.isScanning || model.isOperationRunning || model.isRefreshingMetadata)
-        .fixedSize()
     }
 
     private func providerHeader(_ provider: ProviderID, count: Int) -> some View {
@@ -167,32 +142,34 @@ private struct UpdateRow: View {
     var body: some View {
         Group {
             if wide {
-                HStack(alignment: .top, spacing: DS.Space.s4) {
+                HStack(alignment: .center, spacing: DS.Space.s4) {
                     identity.frame(minWidth: DS.Layout.nameColumnMin, maxWidth: .infinity, alignment: .leading)
-                    version("Current version", value: item.installation.version?.value.rawValue, latest: false)
-                    version("Latest version", value: item.latestVersion, latest: true)
-                    size
-                    category
-                    actions.frame(width: UpdateColumns.actions, alignment: .trailing)
+                    versionSummary
+                    actions
                 }
             } else {
                 VStack(alignment: .leading, spacing: DS.Space.s2) {
-                    HStack(alignment: .top) { identity; Spacer(); actions }
-                    HStack(alignment: .top, spacing: DS.Space.s4) {
-                        version("Current version", value: item.installation.version?.value.rawValue, latest: false)
-                        version("Latest version", value: item.latestVersion, latest: true)
-                        size
-                        category
-                    }
+                    HStack(alignment: .top, spacing: DS.Space.s3) { identity; Spacer(minLength: DS.Space.s2); actions }
+                    versionSummary
                 }
             }
         }
-        .padding(.vertical, DS.Space.s3)
+        .padding(.vertical, DS.Space.s2)
     }
 
     private var identity: some View {
         VStack(alignment: .leading, spacing: DS.Space.s1) {
             name
+            HStack(spacing: DS.Space.s3) {
+                Label(purpose, systemImage: purposeSymbol)
+                if let usage = item.installation.diskUsage {
+                    Text(ByteText.text(usage.bytes, partial: usage.isPartial))
+                        .help(usage.measuredAt.formatted(date: .abbreviated, time: .shortened))
+                }
+            }
+            .font(DS.Font.caption)
+            .foregroundStyle(DS.Palette.textSecondary)
+            .lineLimit(1)
             if !ToolActionsAvailable.canUpdate(item.installation) {
                 Text("Can't update from CLI State").font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary)
             }
@@ -225,47 +202,35 @@ private struct UpdateRow: View {
             .compactMap { $0 }.joined(separator: "\n")
     }
 
-    private func version(_ title: LocalizedStringKey, value: String?, latest: Bool) -> some View {
-        VStack(alignment: .leading, spacing: DS.Space.s1) {
-            if !wide { Text(title).font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary) }
-            HStack(alignment: .firstTextBaseline, spacing: DS.Space.s1) {
-                if latest { UpdateKindTag(kind: item.installation.updateKind).fixedSize() }
-                Text(value ?? "—").font(DS.Font.mono)
-                    .foregroundStyle(latest ? DS.Palette.highlight : DS.Palette.textPrimary)
-                    .lineLimit(2).help(value ?? "—")
-            }
-            let release = releaseLabel(value, channel: latest ? item.installation.latestChannel : nil)
-            if release != String(localized: "No pre-release tag"), release != String(localized: "Channel unknown") {
-                Text(release).font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary)
-            }
-        }.frame(width: latest ? UpdateColumns.latest : DS.Layout.keyColumn, alignment: .leading)
-    }
-
-    private var size: some View {
-        VStack(alignment: .leading, spacing: DS.Space.s1) {
-            if !wide { Text("Installed size").font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary) }
-            if let usage = item.installation.diskUsage {
-                Text(ByteText.text(usage.bytes, partial: usage.isPartial)).font(DS.Font.mono)
-                    .help(usage.measuredAt.formatted(date: .abbreviated, time: .shortened))
-            } else {
-                Text("Not measured").font(DS.Font.caption).foregroundStyle(DS.Palette.textTertiary)
-            }
-        }.frame(width: UpdateColumns.size, alignment: .leading)
-    }
-
-    private var category: some View {
-        VStack(alignment: .leading, spacing: DS.Space.s1) {
-            if !wide { Text("Purpose").font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary) }
-            HStack(spacing: DS.Space.s1) {
-                Image(systemName: purposeSymbol)
-                    .font(DS.Font.inlineIcon)
+    private var versionSummary: some View {
+        let current = item.installation.version?.value.rawValue ?? "—"
+        let latest = item.latestVersion ?? "—"
+        let release = releaseLabel(item.latestVersion, channel: item.installation.latestChannel)
+        return VStack(alignment: .leading, spacing: DS.Space.s1) {
+            HStack(spacing: DS.Space.s2) {
+                Text(current)
                     .foregroundStyle(DS.Palette.textSecondary)
-                    .frame(width: DS.IconSize.inline)
+                    .accessibilityLabel(Text("Current version: \(current)"))
+                    .help(Text("Current version: \(current)"))
+                Image(systemName: Symbol.arrowRight)
+                    .foregroundStyle(DS.Palette.textTertiary)
                     .accessibilityHidden(true)
-                Text(purpose).font(DS.Font.body)
+                Text(latest)
+                    .foregroundStyle(DS.Palette.highlight)
+                    .accessibilityLabel(Text("Latest version: \(latest)"))
+                    .help(Text("Latest version: \(latest)"))
             }
-            .accessibilityElement(children: .combine)
-        }.frame(width: UpdateColumns.purpose, alignment: .leading)
+            .font(DS.Font.mono)
+            .lineLimit(1)
+            .truncationMode(.middle)
+            HStack(spacing: DS.Space.s2) {
+                UpdateKindTag(kind: item.installation.updateKind)
+                if release != String(localized: "No pre-release tag"), release != String(localized: "Channel unknown") {
+                    Text(release).font(DS.Font.caption).foregroundStyle(DS.Palette.textSecondary)
+                }
+            }
+        }
+        .frame(width: wide ? DS.Layout.versionColumnWidth + DS.Layout.stateColumnMin : nil, alignment: .leading)
     }
 
     private var purposeSymbol: String {
@@ -289,11 +254,20 @@ private struct UpdateRow: View {
             if isSkipped {
                 Button("Stop Skipping") { model.unskip(item) }.modifier(DSGlassButton())
             } else {
-                Button("Skip This Version") { model.skip(item) }.modifier(DSGlassButton())
                 Button("Update") { model.requestUpdate([item.ref]) }
                     .modifier(DSGlassButton())
                     .disabled(!ToolActionsAvailable.canUpdate(item.installation) || model.isPreparingOperation)
                     .accessibilityLabel(Text("Update \(item.tool.identity.displayName)"))
+                Menu {
+                    Button("Skip This Version") { model.skip(item) }
+                    Button("Show Tool") { model.show(tool: item.tool.id) }
+                } label: {
+                    Image(systemName: "ellipsis")
+                }
+                .menuStyle(.borderedButton)
+                .controlSize(.small)
+                .frame(minHeight: DS.ControlHeight.regular)
+                .accessibilityLabel(Text("Actions"))
             }
         }.fixedSize()
     }
@@ -331,30 +305,5 @@ struct UpdateKindTag: View {
         .overlay(RoundedRectangle(cornerRadius: DS.Radius.small).strokeBorder(DS.Palette.border, lineWidth: DS.Stroke.hairline))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text("\(kind.title) update"))
-    }
-}
-
-private enum UpdateColumns {
-    static let size = DS.Layout.stateColumnMin
-    static let purpose = DS.Layout.keyColumn
-    static let latest = DS.Layout.versionColumnWidth
-    static let actions = DS.Layout.versionColumnWidth + DS.Space.s8
-    static let minimumWidth = DS.Layout.nameColumnMin + DS.Layout.keyColumn + latest + size + purpose + actions + 7 * DS.Space.s4
-
-    static var header: some View {
-        HStack(spacing: DS.Space.s4) {
-            Text("Program").frame(minWidth: DS.Layout.nameColumnMin, maxWidth: .infinity, alignment: .leading)
-            Text("Current version").frame(width: DS.Layout.keyColumn, alignment: .leading)
-            Text("Latest version").frame(width: latest, alignment: .leading)
-            Text("Installed size").frame(width: size, alignment: .leading)
-            Text("Purpose").frame(width: purpose, alignment: .leading)
-            Text("Actions").frame(width: actions, alignment: .trailing)
-        }
-        .font(DS.Font.captionEmphasis)
-        .foregroundStyle(DS.Palette.textSecondary)
-        .padding(.horizontal, DS.Space.s4)
-        .padding(.vertical, DS.Space.s2)
-        .background(DS.Palette.panelPrimary)
-        .overlay(alignment: .bottom) { Divider() }
     }
 }

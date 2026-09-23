@@ -214,6 +214,61 @@ extension SectionHeader {
     }
 }
 
+/// Shared summary and actions for task lists such as Updates and Issues.
+struct DSWorklistHeader<Metadata: View, Actions: View>: View {
+    let title: Text
+    let symbol: String
+    let metadata: Metadata
+    let actions: Actions
+
+    init(_ title: Text, symbol: String, @ViewBuilder metadata: () -> Metadata, @ViewBuilder actions: () -> Actions) {
+        self.title = title
+        self.symbol = symbol
+        self.metadata = metadata()
+        self.actions = actions()
+    }
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .center, spacing: DS.Space.s4) {
+                summary.fixedSize(horizontal: true, vertical: false)
+                Spacer(minLength: DS.Space.s2)
+                actions.fixedSize()
+            }
+            VStack(alignment: .leading, spacing: DS.Space.s3) {
+                summary
+                actions
+            }
+        }
+        .padding(.horizontal, DS.Space.s4)
+        .padding(.vertical, DS.Space.s3)
+        .frame(minHeight: DS.Layout.pageHeaderMinHeight)
+        .background(DS.Palette.background)
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(DS.Palette.border).frame(height: DS.Stroke.hairline)
+        }
+    }
+
+    private var summary: some View {
+        HStack(alignment: .top, spacing: DS.Space.s2) {
+            Image(systemName: symbol)
+                .font(DS.Font.inlineIcon)
+                .foregroundStyle(DS.Palette.textSecondary)
+                .frame(width: DS.IconSize.inline, height: DS.IconSize.inline)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: DS.Space.s1) {
+                title
+                    .font(DS.Font.headline)
+                    .foregroundStyle(DS.Palette.textPrimary)
+                    .accessibilityAddTraits(.isHeader)
+                metadata
+                    .font(DS.Font.caption)
+                    .foregroundStyle(DS.Palette.textSecondary)
+            }
+        }
+    }
+}
+
 // MARK: - PathText
 
 /// Monospaced path, `~`-abbreviated, truncated in the middle, copyable.
