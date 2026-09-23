@@ -80,14 +80,14 @@ struct EnvironmentCheckCard: View {
                 } label: {
                     Label("Handle issues", systemImage: "wrench.and.screwdriver")
                 }
-                .modifier(DSGlassButton())
+                .buttonStyle(.dsSecondary)
                 .disabled(model.isScanning || model.isOperationRunning || model.isPreparingOperation)
                 Button {
                     Task { await model.checkForUpdates(); showsDetails = true }
                 } label: {
                     Label(model.isScanning ? "Checking environment…" : "Check now", systemImage: model.isScanning ? "hourglass" : "arrow.clockwise")
                 }
-                .modifier(DSGlassButton())
+                .buttonStyle(.dsSecondary)
                 .disabled(model.isScanning || model.isOperationRunning)
             }
             if showsHandling {

@@ -33,6 +33,7 @@ struct RootView: View {
                             Label("Back to list", systemImage: "xmark.circle")
                         }
                         .labelStyle(.iconOnly)
+                        .modifier(DSToolbarGlassButton())
                         .help(Text("Close details and return to the full list"))
                     }
                 }
@@ -88,6 +89,7 @@ private struct ScanButton: View {
             }
         }
         .disabled(model.isScanning)
+        .modifier(DSToolbarGlassButton())
         .help(model.isScanning ? Text("Scanning…") : Text("Rescan the environment (⌘R)"))
     }
 }
@@ -102,6 +104,7 @@ private struct SettingsButton: View {
             Label("Settings", systemImage: Symbol.settings)
         }
         .accessibilityLabel(Text("Settings"))
+        .modifier(DSToolbarGlassButton())
         .help(Text("Settings (⌘,)"))
     }
 }

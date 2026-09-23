@@ -95,11 +95,11 @@ struct UpdatesView: View {
             Button { Task { await model.checkForUpdates() } } label: {
                 Label("Check for Updates", systemImage: Symbol.updates)
             }
-            .modifier(DSGlassButton())
+            .buttonStyle(.dsSecondary)
             Button { model.requestUpdateAll() } label: {
                 Label("Update All", systemImage: Symbol.update)
             }
-            .modifier(DSGlassButton(prominent: true))
+            .buttonStyle(.dsPrimary)
             .disabled(items.filter { ToolActionsAvailable.canUpdate($0.installation) }.isEmpty)
         }
         .disabled(model.isPreparingOperation || model.isScanning || model.isOperationRunning || model.isRefreshingMetadata)
@@ -252,10 +252,10 @@ private struct UpdateRow: View {
     private var actions: some View {
         HStack(spacing: DS.Space.s2) {
             if isSkipped {
-                Button("Stop Skipping") { model.unskip(item) }.modifier(DSGlassButton())
+                Button("Stop Skipping") { model.unskip(item) }.buttonStyle(.dsSecondary)
             } else {
                 Button("Update") { model.requestUpdate([item.ref]) }
-                    .modifier(DSGlassButton())
+                    .buttonStyle(.dsSecondary)
                     .disabled(!ToolActionsAvailable.canUpdate(item.installation) || model.isPreparingOperation)
                     .accessibilityLabel(Text("Update \(item.tool.identity.displayName)"))
                 Menu {

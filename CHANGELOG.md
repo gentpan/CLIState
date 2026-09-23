@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 内容区、卡片、列表、详情和设置的小操作按钮改为原生 macOS 描边／强调样式；液态玻璃仅用于窗口顶部工具栏。
+- Content actions now use native macOS bordered and prominent buttons; Liquid Glass is reserved for the top window toolbar.
 - 问题页将警告和建议改为轻量分组标题与灰色卡片列表；页首明确显示问题总数，并隐藏为零的批量清理提示。
 - Issues now use compact severity headings and gray grouped cards. The page header shows the issue total and omits an empty batch-cleanup count.
 - Homebrew 卸载前检查已安装的依赖项；如果其他软件仍依赖目标软件包，确认窗口列出依赖并阻止执行。活动面板切换记录时重置输出位置，空输出显示明确提示。
