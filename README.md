@@ -1,14 +1,24 @@
 # CLI State
 
-**看清 Mac 上安装的 CLI、运行时和开发工具，并知道终端真正使用的是哪一个版本。**
+**看清终端实际运行的是哪一个命令。**
 
-[English](README.en.md) · [下载](https://github.com/gentpan/CLIState/releases/latest) · [反馈问题](https://github.com/gentpan/CLIState/issues/new/choose)
+[![最新版本](https://img.shields.io/github/v/release/gentpan/CLIState?style=flat-square)](https://github.com/gentpan/CLIState/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/gentpan/CLIState/ci.yml?branch=main&label=CI&style=flat-square)](https://github.com/gentpan/CLIState/actions/workflows/ci.yml)
+[![macOS 15+](https://img.shields.io/badge/macOS-15%2B-4c5966?style=flat-square)](project.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-4c5966?style=flat-square)](LICENSE)
+
+[English](README.en.md) · [下载最新版](https://github.com/gentpan/CLIState/releases/latest) · [官网](https://clistate.com) · [反馈问题](https://github.com/gentpan/CLIState/issues/new/choose)
+
+CLI State 是一款开源的原生 macOS 应用，将命令的 **PATH 解析结果、安装来源、版本、冲突和更新** 放在同一个界面。它支持 Homebrew、npm、uv、pipx、pnpm、Cargo 和部分官方安装器；无法确认归属的工具保持只读。
 
 ![CLI State 概览](docs/images/overview.png)
 
-CLI State 是一个原生 macOS 应用，用来理解和管理你的命令行开发环境。它会自动发现通过 Homebrew、npm、uv、pipx、pnpm、Cargo 以及官方安装器装上的工具，按终端的真实 PATH 解析出实际生效的可执行文件，找出重复安装和冲突，并跟踪可用更新。
+## 能做什么
 
-它不是另一个 Homebrew GUI：Homebrew 关心"Homebrew 里有什么"，CLI State 关心"终端实际是什么环境"。
+- **找到生效的命令**：按 PATH 顺序查看每个可执行文件的匹配项、生效版本与被遮蔽的副本，并识别 Shell 别名和函数。
+- **解释安装来源**：展示 Homebrew、npm、uv 等来源的证据与可信度，区分同名工具的不同安装副本。
+- **发现问题并安全维护**：检查失效链接、PATH 冲突和可用更新；更新、卸载与清理前预览命令和影响，完成后重新扫描。
+- **浏览与回顾环境**：查看概览图表、版本变更历史和精选工具；可导出安装清单或配置文件，供迁移时逐项核对。
 
 ## 下载安装
 
@@ -16,11 +26,10 @@ CLI State 是一个原生 macOS 应用，用来理解和管理你的命令行开
 
 ```bash
 brew tap gentpan/tap
-brew trust gentpan/tap
-brew install --cask clistate
+brew install --cask gentpan/tap/clistate
 ```
 
-Homebrew 6 需要先信任第三方 tap（`brew trust`）才能安装。
+使用完整的 cask 名称只信任 CLI State，无需信任整个 tap。详见 [Homebrew 的 Tap Trust 说明](https://docs.brew.sh/Tap-Trust)。
 
 **手动下载**
 
@@ -30,20 +39,6 @@ Homebrew 6 需要先信任第三方 tap（`brew trust`）才能安装。
 之后的版本会在 App 内自动提示更新，也可以在 设置 › 关于 里手动检查。
 
 系统要求：macOS 15 或更高版本，支持 Apple Silicon 与 Intel。
-
-## 功能
-
-- **精选工具发现**：按用途浏览开发入门、PHP、Python 和影音工具，识别已有安装，支持单个或批量安装预览。
-- **可视化概览**：安装来源圆环图、版本变化趋势和一键环境检查，支持处理的项目可直接查看处理方案。
-
-- **环境发现**：在干净环境里启动你的登录 Shell，读取与新开 Terminal 完全一致的 PATH；识别不存在、重复、受隐私保护的 PATH 目录。
-- **解析链**：每个命令按 PATH 顺序列出所有匹配项，标出生效与被遮蔽的安装，并识别 alias / function 遮蔽。
-- **来源归属与证据**：说明每个安装是谁装的（Homebrew、npm、uv、pipx、pnpm、Cargo、nvm、rustup、官方安装器、系统……），附带证据和可信度。可信度不足时只读，不做任何修改。
-- **版本与更新**：直接询问各包管理器自己的官方源；官方安装器（如 Claude Code）通过发布渠道查询，并标明渠道。
-- **健康检查**：PATH 冲突、多重安装、失效链接、缺失的运行时、失败的服务。
-- **更新、卸载、服务管理**：只通过原本的包管理器执行。执行前展示确切命令，并用 dry-run 预览连带变化；执行后重新扫描，核对版本。
-- **清理**：预览并清理包管理器缓存、旧版本、孤立依赖和失效链接。来源不明的文件只会移到废纸篓，从不直接删除。
-- **自动更新策略**：可按工具、按来源或全局设置为关闭、仅提醒（默认）或自动；默认跳过大版本，只在接通电源时运行。
 
 ## 支持的来源
 

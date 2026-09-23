@@ -1,14 +1,24 @@
 # CLI State
 
-**Know what's running in your terminal.**
+**See which command your terminal actually runs.**
 
-[简体中文](README.md) · [Download](https://github.com/gentpan/CLIState/releases/latest) · [Report an issue](https://github.com/gentpan/CLIState/issues/new/choose)
+[![Latest release](https://img.shields.io/github/v/release/gentpan/CLIState?style=flat-square)](https://github.com/gentpan/CLIState/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/gentpan/CLIState/ci.yml?branch=main&label=CI&style=flat-square)](https://github.com/gentpan/CLIState/actions/workflows/ci.yml)
+[![macOS 15+](https://img.shields.io/badge/macOS-15%2B-4c5966?style=flat-square)](project.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-4c5966?style=flat-square)](LICENSE)
+
+[简体中文](README.md) · [Download latest](https://github.com/gentpan/CLIState/releases/latest) · [Website](https://clistate.com) · [Report an issue](https://github.com/gentpan/CLIState/issues/new/choose)
+
+CLI State is an open-source native macOS app that brings **PATH resolution, installation sources, versions, conflicts, and updates** into one place. It supports Homebrew, npm, uv, pipx, pnpm, Cargo, and selected official installers. Tools whose ownership cannot be confirmed remain read-only.
 
 ![CLI State overview](docs/images/overview.png)
 
-CLI State is a native macOS app for understanding and managing your command-line development environment. It discovers tools and runtimes installed through Homebrew, npm, uv, pipx, pnpm, Cargo and official installers, resolves the binaries your terminal actually runs from your real PATH, detects duplicate and conflicting installations, and keeps track of available updates.
+## What you can do
 
-It is not another Homebrew GUI: a Homebrew GUI shows what Homebrew has; CLI State shows what your terminal environment actually is.
+- **Find the active command:** See every executable match in PATH order, the version that takes effect, shadowed copies, and shell aliases or functions.
+- **Understand where it came from:** Inspect evidence and confidence for Homebrew, npm, uv, and other sources, including separate installations of the same tool.
+- **Spot problems and maintain safely:** Check broken links, PATH conflicts, and updates. Preview commands and their effects before updating, uninstalling, or cleaning up; rescan afterward.
+- **Explore and revisit your setup:** Review charts, version-change history, and curated tools. Export an installation list or profile to review when moving to another Mac.
 
 ## Install
 
@@ -16,11 +26,10 @@ It is not another Homebrew GUI: a Homebrew GUI shows what Homebrew has; CLI Stat
 
 ```bash
 brew tap gentpan/tap
-brew trust gentpan/tap
-brew install --cask clistate
+brew install --cask gentpan/tap/clistate
 ```
 
-Homebrew 6 requires trusting a third-party tap (`brew trust`) before installing from it.
+Using the fully qualified cask name trusts only CLI State, without trusting the entire tap. See [Homebrew's Tap Trust guide](https://docs.brew.sh/Tap-Trust).
 
 **Manual download**
 
@@ -30,20 +39,6 @@ Homebrew 6 requires trusting a third-party tap (`brew trust`) before installing 
 Later versions are offered inside the app; you can also check in Settings › About.
 
 Requires macOS 15 or later, Apple Silicon or Intel.
-
-## Features
-
-- **Discover tools**: curated developer, PHP, Python and media tools, with existing-install detection and individual or batch installation previews.
-- **Visual overview**: installation-source charts, recorded version changes and environment checks with actionable maintenance.
-
-- **Environment discovery** — starts your login shell in a clean environment to read the same PATH a new Terminal window gets; flags missing, duplicate and privacy-protected entries.
-- **Resolution chains** — every PATH match for a command in order, which one is active, which are shadowed, and shell aliases/functions that run first.
-- **Attribution with evidence** — who installed each executable (Homebrew, npm, uv, pipx, pnpm, Cargo, nvm, rustup, official installers, macOS…), with evidence and confidence. Anything not confirmed stays read-only.
-- **Versions and updates** — asked of each package manager's own registry; official installers such as Claude Code are checked against their release channel.
-- **Health** — PATH conflicts, multiple installations, broken links, missing runtimes, failed services.
-- **Update, uninstall, services** — always through the owning package manager, showing the exact command and a dry-run preview first, then rescanning to verify.
-- **Cleanup** — previewed cleanup of package caches, old versions, orphaned dependencies and broken links. Unowned files only go to the Trash.
-- **Auto-update policy** — off, notify (default) or automatic, per tool, provider or globally; skips major versions by default and runs only on power.
 
 ## Supported sources
 
@@ -73,7 +68,7 @@ Requires macOS 15 or later, Apple Silicon or Intel.
 
 **Do I need to update every day?** No. While it runs, CLI State checks on a schedule (every 3 hours by default, refreshing Homebrew package info first) and only notifies by default. Only tools you set to Automatic are updated in the background, once a day after the time you choose, and major versions are skipped by default.
 
-**How does CLI State update itself?** Through Sparkle, from this repository's Releases, verifying signatures before installing.
+**How does CLI State update itself?** Sparkle checks the official update server first and falls back to this repository's Releases, verifying signatures before installing.
 
 ## Feedback
 
