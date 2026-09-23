@@ -67,7 +67,9 @@ struct SidebarNavigation<ID: Hashable>: View {
                         }
                     }
                 }
-                .padding(.vertical, DS.Space.s3)
+                // Match the Overview card's top inset below the native toolbar.
+                .padding(.top, DS.Space.s6)
+                .padding(.bottom, DS.Space.s3)
                 .padding(.horizontal, DS.Space.s2)
                 .frame(minHeight: viewport.size.height, alignment: .top)
             }
