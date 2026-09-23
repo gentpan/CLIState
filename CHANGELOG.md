@@ -9,6 +9,8 @@
 - Visual environment checks, an interactive installation-source chart and actionable maintenance in Overview.
 
 **改进与修复 / Improvements and fixes**
+- 更新页将待更新总量与检查时间合并为简洁摘要；来源标题只显示名称和数量，来源检查时间明显不同时才单独提示。列表改为灰色分组卡片，保留单项、批量及跳过操作。
+- The Updates page now shows one total and check time, compact provider counts, and a provider time only when it differs meaningfully. Grouped gray cards retain individual, batch and skip actions.
 - 内容区、卡片、列表、详情和设置的小操作按钮改为原生 macOS 描边／强调样式；液态玻璃仅用于窗口顶部工具栏。
 - Content actions now use native macOS bordered and prominent buttons; Liquid Glass is reserved for the top window toolbar.
 - 问题页将警告和建议改为轻量分组标题与灰色卡片列表；页首明确显示问题总数，并隐藏为零的批量清理提示。

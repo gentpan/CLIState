@@ -718,6 +718,35 @@
         }
       }
     },
+    "%lld updates available" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld update available"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld updates available"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "待更新 %lld 项"
+          }
+        }
+      }
+    },
     "%lld updates failed. Open CLI State for details." : {
       "localizations" : {
         "en" : {
@@ -4967,6 +4996,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "统计已记录的版本变更，包含外部操作和降级。日期为扫描发现日期，开始记录之前的日期不计入。"
+          }
+        }
+      }
+    },
+    "Recheck" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新检查"
           }
         }
       }

@@ -12,30 +12,18 @@ struct UpdatesView: View {
             if items.isEmpty && skipped.isEmpty {
                 EmptyStateView("Everything is on the latest version", symbol: StatusKind.latest.symbol, message: String(localized: "Check again to look for new releases."))
             } else {
-                List {
-                    ForEach(groups(items), id: \.provider) { group in
-                        Section {
-                            ForEach(group.items) { item in
-                                UpdateRow(item: item, isSkipped: false, wide: contentWidth >= DS.Layout.toolsTableFullWidth)
-                            }
-                        } header: {
-                            providerHeader(group.provider, count: group.items.count)
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: DS.Space.s6) {
+                        ForEach(groups(items), id: \.provider) { group in
+                            updateGroup(group.items, provider: group.provider)
+                        }
+                        if !skipped.isEmpty {
+                            skippedGroup(skipped)
                         }
                     }
-                    if !skipped.isEmpty {
-                        Section {
-                            ForEach(skipped) { item in
-                                UpdateRow(item: item, isSkipped: true, wide: contentWidth >= DS.Layout.toolsTableFullWidth)
-                            }
-                        } header: {
-                            Text("Skipped versions")
-                                .font(DS.Font.captionEmphasis)
-                        }
-                    }
+                    .padding(DS.Space.s4)
                 }
-                .listStyle(.inset)
-                .alternatingRowBackgrounds(.disabled)
-                .dsScrollBackground()
+                .background(DS.Palette.background)
             }
         }
         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { contentWidth = $0 }
@@ -56,11 +44,7 @@ struct UpdatesView: View {
         }
         .safeAreaInset(edge: .top, spacing: 0) {
             VStack(spacing: 0) {
-                DSWorklistHeader(Text("\(items.count) updates"), symbol: Symbol.updates) {
-                    headerMetadata
-                } actions: {
-                    headerActions(items)
-                }
+                summaryHeader(items)
                 if let error = model.metadataRefreshError {
                     Label(error, systemImage: "exclamationmark.triangle")
                         .font(DS.Font.body)
@@ -75,25 +59,65 @@ struct UpdatesView: View {
         .dsPageTitle(Text("Updates"), symbol: Symbol.updates)
     }
 
-    private var headerMetadata: some View {
-        HStack(spacing: DS.Space.s2) {
-            if let checked = model.snapshot?.latestCheckedAt ?? model.providerSnapshot(.homebrew)?.latestCheckedAt {
-                Label(RelativeTime.text(checked), systemImage: "clock")
-                    .help(Text("Last checked \(RelativeTime.text(checked))"))
+    private var lastCheckedAt: Date? {
+        model.snapshot?.latestCheckedAt ?? model.snapshot?.providers.compactMap(\.latestCheckedAt).max()
+    }
+
+    private func summaryHeader(_ items: [UpdateItem]) -> some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: DS.Space.s4) {
+                summary(items.count).fixedSize(horizontal: true, vertical: false)
+                Spacer(minLength: DS.Space.s2)
+                headerActions(items).fixedSize()
             }
-            let major = model.updateItems.filter { $0.installation.updateKind == .major }.count
-            if major > 0 {
-                Label("\(major) major updates", systemImage: Symbol.needsAttention)
-                    .foregroundStyle(DS.Palette.warning)
+            VStack(alignment: .leading, spacing: DS.Space.s3) {
+                summary(items.count)
+                headerActions(items)
             }
         }
-        .help(Text("Updates don't affect environment status. Automatic updates skip major versions unless you allow them."))
+        .padding(.horizontal, DS.Space.s4)
+        .padding(.vertical, DS.Space.s3)
+        .frame(minHeight: DS.Layout.pageHeaderMinHeight)
+        .background(DS.Palette.background)
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(DS.Palette.border).frame(height: DS.Stroke.hairline)
+        }
+    }
+
+    private func summary(_ count: Int) -> some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .firstTextBaseline, spacing: DS.Space.s3) {
+                updateCount(count)
+                checkedTime
+            }
+            VStack(alignment: .leading, spacing: DS.Space.s1) {
+                updateCount(count)
+                checkedTime
+            }
+        }
+    }
+
+    private func updateCount(_ count: Int) -> some View {
+        Text("\(count) updates available")
+            .font(DS.Font.headline)
+            .foregroundStyle(DS.Palette.textPrimary)
+            .accessibilityAddTraits(.isHeader)
+    }
+
+    @ViewBuilder
+    private var checkedTime: some View {
+        if let checked = lastCheckedAt {
+            Text("Last checked \(RelativeTime.text(checked))")
+                .font(DS.Font.caption)
+                .foregroundStyle(DS.Palette.textSecondary)
+                .help(checked.formatted(date: .abbreviated, time: .shortened))
+        }
     }
 
     private func headerActions(_ items: [UpdateItem]) -> some View {
         HStack(spacing: DS.Space.s2) {
             Button { Task { await model.checkForUpdates() } } label: {
-                Label("Check for Updates", systemImage: Symbol.updates)
+                Label("Recheck", systemImage: Symbol.refresh)
             }
             .buttonStyle(.dsSecondary)
             Button { model.requestUpdateAll() } label: {
@@ -105,19 +129,63 @@ struct UpdatesView: View {
         .disabled(model.isPreparingOperation || model.isScanning || model.isOperationRunning || model.isRefreshingMetadata)
     }
 
-    private func providerHeader(_ provider: ProviderID, count: Int) -> some View {
-        HStack(spacing: DS.Space.s2) {
-            InstalledViaLabel(provider: provider, font: DS.Font.captionEmphasis)
-            Text("\(count) updates")
-                .font(DS.Font.caption)
-                .foregroundStyle(DS.Palette.textSecondary)
-            Spacer()
-            if let checked = model.providerSnapshot(provider)?.latestCheckedAt {
-                Text("Checked \(RelativeTime.text(checked))")
+    private func updateGroup(_ items: [UpdateItem], provider: ProviderID) -> some View {
+        VStack(alignment: .leading, spacing: DS.Space.s2) {
+            HStack(spacing: DS.Space.s2) {
+                IconText(symbol: Symbol.provider(provider), text: provider.displayName,
+                         tint: DS.Palette.textSecondary, textColor: DS.Palette.textPrimary, font: DS.Font.bodyEmphasis)
+                Text(items.count, format: .number)
                     .font(DS.Font.caption)
-                    .foregroundStyle(DS.Palette.textTertiary)
+                    .foregroundStyle(DS.Palette.textSecondary)
+                Spacer(minLength: DS.Space.s2)
+                if let checked = model.providerSnapshot(provider)?.latestCheckedAt,
+                   let latest = lastCheckedAt, latest.timeIntervalSince(checked) >= 5 * 60 {
+                    Text("Checked \(RelativeTime.text(checked))")
+                        .font(DS.Font.caption)
+                        .foregroundStyle(DS.Palette.textSecondary)
+                }
+            }
+            .padding(.horizontal, DS.Space.s4)
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
+            updateRows(items, isSkipped: false)
+        }
+    }
+
+    private func skippedGroup(_ items: [UpdateItem]) -> some View {
+        VStack(alignment: .leading, spacing: DS.Space.s2) {
+            HStack(spacing: DS.Space.s2) {
+                Text("Skipped versions")
+                    .font(DS.Font.bodyEmphasis)
+                    .foregroundStyle(DS.Palette.textPrimary)
+                Text(items.count, format: .number)
+                    .font(DS.Font.caption)
+                    .foregroundStyle(DS.Palette.textSecondary)
+            }
+            .padding(.horizontal, DS.Space.s4)
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
+            updateRows(items, isSkipped: true)
+        }
+    }
+
+    private func updateRows(_ items: [UpdateItem], isSkipped: Bool) -> some View {
+        LazyVStack(spacing: 0) {
+            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                if index > 0 {
+                    Rectangle()
+                        .fill(DS.Palette.border)
+                        .frame(height: DS.Stroke.hairline)
+                        .padding(.leading, DS.Space.s4)
+                }
+                UpdateRow(item: item, isSkipped: isSkipped,
+                          wide: contentWidth - DS.Space.s4 * 4 >= DS.Layout.toolsTableFullWidth)
+                    .padding(.horizontal, DS.Space.s4)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(DS.Palette.panelPrimary, in: RoundedRectangle(cornerRadius: DS.Radius.base))
+        .overlay(RoundedRectangle(cornerRadius: DS.Radius.base).strokeBorder(DS.Palette.border, lineWidth: DS.Stroke.hairline))
     }
 
     private func groups(_ items: [UpdateItem]) -> [(provider: ProviderID, items: [UpdateItem])] {
