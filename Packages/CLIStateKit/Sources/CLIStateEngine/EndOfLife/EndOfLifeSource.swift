@@ -81,7 +81,9 @@ public struct EndOfLifeSource: Sendable {
     }
 
     public static func v1URL(_ slug: String) -> URL {
-        baseURL.appending(path: "api/v1/products/\(slug)/")
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
+        components.path = "/api/v1/products/\(slug)/"
+        return components.url!
     }
 
     public static func legacyURL(_ slug: String) -> URL {
