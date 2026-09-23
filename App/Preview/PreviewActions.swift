@@ -148,7 +148,7 @@ final class PreviewActions: AppActions {
             PreflightCheck(kind: .systemManaged, outcome: installation.isSystemManaged ? .failed : .passed),
         ]
         if !installation.dependents.isEmpty {
-            checks.append(PreflightCheck(kind: .reverseDependencies, outcome: .warning, detail: installation.dependents.joined(separator: ", "),
+            checks.append(PreflightCheck(kind: .reverseDependencies, outcome: .failed, detail: installation.dependents.joined(separator: ", "),
                                          items: installation.dependents.map { PreflightItem(name: $0, change: .dependent) }))
         }
         var plan = OperationPlan(kind: .uninstall, providerID: provider, targets: [target], commands: [command], requiresNetwork: false)

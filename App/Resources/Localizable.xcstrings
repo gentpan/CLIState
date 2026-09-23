@@ -3871,6 +3871,17 @@
         }
       }
     },
+    "No command output was captured." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未捕获到命令输出。"
+          }
+        }
+      }
+    },
     "No direct cleanup is available for this link: its location may be protected or not writable. Use Finder to inspect it, or repair it with the original installer. CLI State will not request administrator access to delete it." : {
       "localizations" : {
         "zh-Hans" : {

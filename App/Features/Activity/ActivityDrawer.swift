@@ -17,6 +17,7 @@ struct ActivityDrawer: View {
                 if model.isActivityExpanded {
                     Divider()
                     OutputView(run: run, reduceMotion: reduceMotion)
+                        .id(run.id)
                         .frame(height: DS.Layout.drawerHeight)
                         .transition(reduceMotion ? .identity : .move(edge: .bottom).combined(with: .opacity))
                 }
@@ -144,7 +145,13 @@ private struct OutputView: View {
                             .id(line.id)
                     }
                     if run.lines.isEmpty {
-                        Text("Waiting for output…")
+                        Group {
+                            if run.isRunning {
+                                Text("Waiting for output…")
+                            } else {
+                                Text("No command output was captured.")
+                            }
+                        }
                             .font(DS.Font.mono)
                             .foregroundStyle(DS.Palette.textTertiary)
                     }

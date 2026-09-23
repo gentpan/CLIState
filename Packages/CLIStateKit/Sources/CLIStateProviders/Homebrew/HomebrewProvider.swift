@@ -293,7 +293,9 @@ public struct HomebrewProvider: ToolUpdateProvider, ToolUninstallProvider, Servi
         if !failures.isEmpty {
             return [PreflightCheck(kind: .reverseDependencies, outcome: .warning, detail: failures.joined(separator: "\n"), items: dependents)]
         }
-        return [PreflightCheck(kind: .reverseDependencies, outcome: dependents.isEmpty ? .passed : .warning, items: dependents)]
+        // Homebrew refuses `brew uninstall` while installed formulae still depend
+        // on the target. Surface that before the user confirms the operation.
+        return [PreflightCheck(kind: .reverseDependencies, outcome: dependents.isEmpty ? .passed : .failed, items: dependents)]
     }
 
     // MARK: Cleanup
