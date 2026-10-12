@@ -33,7 +33,7 @@ brew install --cask gentpan/tap/clistate
 
 **手动下载**
 
-1. 从 [Releases](https://github.com/gentpan/CLIState/releases/latest) 下载 `CLIState-<版本>.zip`（已签名并经 Apple 公证）。
+1. 从 [Releases](https://github.com/gentpan/CLIState/releases/latest) 下载 `CLIState-<版本>.zip`（0.2.3 为本地签名包，未经过 Apple 公证；首次打开时可能需要按 macOS 提示允许打开）。
 2. 解压后把 `CLIState.app` 拖进"应用程序"文件夹。
 
 之后的版本会在 App 内自动提示更新，也可以在 设置 › 关于 里手动检查。

@@ -33,7 +33,7 @@ Using the fully qualified cask name trusts only CLI State, without trusting the 
 
 **Manual download**
 
-1. Download `CLIState-<version>.zip` from [Releases](https://github.com/gentpan/CLIState/releases/latest) (signed and notarized by Apple).
+1. Download `CLIState-<version>.zip` from [Releases](https://github.com/gentpan/CLIState/releases/latest) (0.2.3 uses local ad-hoc signing and is not Apple-notarized; macOS may require you to allow the app on first launch).
 2. Unzip it and move `CLIState.app` to Applications.
 
 Later versions are offered inside the app; you can also check in Settings › About.
