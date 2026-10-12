@@ -13,6 +13,8 @@ CLI State 是一款开源的原生 macOS 应用，将命令的 **PATH 解析结�
 
 ![CLI State 概览](docs/images/overview.png)
 
+[查看 0.2.3 各页面截图](docs/screenshots.md)（内置示例数据，不包含个人工具或数据）。
+
 ## 能做什么
 
 - **找到生效的命令**：按 PATH 顺序查看每个可执行文件的匹配项、生效版本与被遮蔽的副本，并识别 Shell 别名和函数。

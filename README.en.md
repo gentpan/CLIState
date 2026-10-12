@@ -13,6 +13,8 @@ CLI State is an open-source native macOS app that brings **PATH resolution, inst
 
 ![CLI State overview](docs/images/overview.png)
 
+[View the 0.2.3 screen gallery](docs/screenshots.md) (built-in sample data; no personal tools or data).
+
 ## What you can do
 
 - **Find the active command:** See every executable match in PATH order, the version that takes effect, shadowed copies, and shell aliases or functions.
